@@ -2,7 +2,11 @@ import spock.lang.*
 import geb.*
 import geb.spock.*
 
-class GoogleSpec extends GebSpec {
+class GoogleSpec extends GebReportingSpec {
+	
+	File getReportDir() {
+		new File("build/reports/geb-reports")
+	}
 	
 	def "the first link should be wikipedia"() {
 		when:

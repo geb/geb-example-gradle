@@ -2,6 +2,7 @@ apply plugin: "groovy"
 
 repositories {
 	mavenCentral()
+	mavenRepo urls: "https://nexus.codehaus.org/content/repositories/snapshots"
 }
 
 configurations {
@@ -11,16 +12,19 @@ configurations {
 dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.7.5"
 	
+	def gebVersion = "0.6-SNAPSHOT"
+	def seleniumVersion = "2.0b2"
+	
 	// If using Spock, need to depend on geb-spock
-	testCompile "org.codehaus.geb:geb-spock:0.5.1"
+	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
 	testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
 	
 	// If using JUnit, need to depend on geb-junit (3 or 4)
-	testCompile "org.codehaus.geb:geb-junit4:0.5.1"
+	testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
 	testCompile "junit:junit-dep:4.8.2"
 	
 	// Need a driver implementation
-	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:2.0a5"
+	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
 }
 
 task wrapper(type: Wrapper) {
