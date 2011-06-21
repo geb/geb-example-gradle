@@ -13,7 +13,7 @@ dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.7.5"
 	
 	def gebVersion = "0.6-SNAPSHOT"
-	def seleniumVersion = "2.0b2"
+	def seleniumVersion = "2.0rc2"
 	
 	// If using Spock, need to depend on geb-spock
 	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
@@ -25,6 +25,10 @@ dependencies {
 	
 	// Need a driver implementation
 	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+}
+
+test {
+	systemProperties "geb.build.reportsDir": "$reportsDir/$name-geb"
 }
 
 task wrapper(type: Wrapper) {

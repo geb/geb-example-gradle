@@ -8,10 +8,6 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4)
 class GoogleTest extends GebReportingTest {
 	
-	File getReportDir() {
-		new File("build/reports/geb-reports")
-	}
-	
 	@Test 
 	void theFirstLinkShouldBeWikipedia() {
 		to GoogleHomePage
