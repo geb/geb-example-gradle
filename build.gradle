@@ -12,7 +12,7 @@ configurations {
 dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.7.5"
 	
-	def gebVersion = "0.6-SNAPSHOT"
+	def gebVersion = "0.6.0.RC1"
 	def seleniumVersion = "2.0rc2"
 	
 	// If using Spock, need to depend on geb-spock
@@ -28,7 +28,10 @@ dependencies {
 }
 
 test {
-	systemProperties "geb.build.reportsDir": "$reportsDir/$name-geb"
+	systemProperty "geb.build.reportsDir", "$reportsDir/$name-geb"
+	
+	// If you wanted to set the baseUrl in your build…
+	// systemProperty "geb.build.baseUrl", "http://myapp.com"
 }
 
 task wrapper(type: Wrapper) {
