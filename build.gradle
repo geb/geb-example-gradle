@@ -1,4 +1,4 @@
-apply plugin: "groovy"      
+apply plugin: "groovy"
 
 repositories {
 	mavenCentral()
@@ -9,11 +9,14 @@ configurations {
 	testCompile.transitive = true
 }
 
+// The drivers we want to use
+drivers = ["htmlunit", "firefox", "chrome"]
+
 dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.7.5"
 	
-	def gebVersion = "0.6.0.RC1"
-	def seleniumVersion = "2.0rc2"
+	def gebVersion = "0.6.0"
+	def seleniumVersion = "2.0rc3"
 	
 	// If using Spock, need to depend on geb-spock
 	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
@@ -23,17 +26,27 @@ dependencies {
 	testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
 	testCompile "junit:junit-dep:4.8.2"
 	
-	// Need a driver implementation
-	testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+	// Drivers
+	drivers.each { driver ->
+		testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
+	}
 }
 
-test {
-	systemProperty "geb.build.reportsDir", "$reportsDir/$name-geb"
-	
-	// If you wanted to set the baseUrl in your build…
-	// systemProperty "geb.build.baseUrl", "http://myapp.com"
+drivers.each { driver ->
+	task "${driver}Test"(type: Test) {
+		testReportDir = file("$reportsDir/$name/tests")
+		testResultsDir = file("$buildDir/test-results/$name")
+		
+		systemProperty "geb.build.reportsDir", "$reportsDir/$name/geb"
+		systemProperty "geb.env", driver
+		
+		// If you wanted to set the baseUrl in your build…
+		// systemProperty "geb.build.baseUrl", "http://myapp.com"
+	}
 }
+
+task test(overwrite: true, dependsOn: drivers.collect { tasks["${it}Test"] })
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '0.9'
+	gradleVersion = '1.0-milestone-3'
 }
