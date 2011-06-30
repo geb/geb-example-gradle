@@ -9,26 +9,19 @@ class GoogleSpec extends GebReportingSpec {
 		to GoogleHomePage
 		
 		and:
-		// enter wikipedia into the search field
-		search.field.value("wikipedia")
+		search.forTerm "wikipedia"
 
 		then:
-		// wait for the change to results page to happen
-		// (google updates the page without a new request)
-		waitFor { at(GoogleResultsPage) }
+		at GoogleResultsPage
 
 		and:
-		// is the first link to wikipedia?
-		resultLink(0).text() == "Wikipedia"
+		firstResultLink.text() == "Wikipedia"
 
 		when:
-		// click the link
-		resultLink(0).click()
+		firstResultLink.click()
 
 		then:
-		// wait for Google's javascript to redirect us
-		// to wikipedia
-		waitFor { at(WikipediaPage) }
+		waitFor { at WikipediaPage }
 	}
 	
 }

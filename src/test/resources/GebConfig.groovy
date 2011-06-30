@@ -18,7 +18,7 @@ driver = {
 }
 
 waiting {
-	timeout = 20
+	timeout = 2
 }
 
 environments {
