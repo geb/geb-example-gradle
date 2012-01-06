@@ -48,5 +48,5 @@ drivers.each { driver ->
 task test(overwrite: true, dependsOn: drivers.collect { tasks["${it}Test"] })
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.0-milestone-3'
+	gradleVersion = '1.0-milestone-7'
 }
