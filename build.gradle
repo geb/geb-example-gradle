@@ -15,9 +15,9 @@ drivers = ["htmlunit", "firefox", "chrome"]
 dependencies {
 	groovy "org.codehaus.groovy:groovy-all:1.7.5"
 	
-	def gebVersion = "0.6.0"
-	def seleniumVersion = "2.0rc3"
-	
+	def gebVersion = "0.6.2"
+	def seleniumVersion = "2.17.0"
+
 	// If using Spock, need to depend on geb-spock
 	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
 	testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
