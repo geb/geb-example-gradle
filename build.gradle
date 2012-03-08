@@ -13,14 +13,14 @@ configurations {
 drivers = ["htmlunit", "firefox", "chrome"]
 
 dependencies {
-	groovy "org.codehaus.groovy:groovy-all:1.7.5"
+	groovy "org.codehaus.groovy:groovy-all:1.8.6"
 	
-	def gebVersion = "0.6.0"
-	def seleniumVersion = "2.0rc3"
-	
+	def gebVersion = "0.6.3"
+	def seleniumVersion = "2.17.0"
+
 	// If using Spock, need to depend on geb-spock
 	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
-	testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
+	testCompile "org.spockframework:spock-core:0.6-groovy-1.8"
 	
 	// If using JUnit, need to depend on geb-junit (3 or 4)
 	testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
@@ -48,5 +48,5 @@ drivers.each { driver ->
 task test(overwrite: true, dependsOn: drivers.collect { tasks["${it}Test"] })
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.0-milestone-3'
+	gradleVersion = '1.0-milestone-8a'
 }

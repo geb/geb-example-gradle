@@ -6,7 +6,7 @@ class GoogleResultsPage extends Page {
 		search { module GoogleSearchModule }
 		results { $("li.g") }
 		result { i -> results[i] }
-		resultLink { i -> result(i).find("a.l") }
+		resultLink { i -> result(i).find("a.l")[0] }
 		firstResultLink { resultLink(0) }
 	}
 }
