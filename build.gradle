@@ -2,7 +2,7 @@ apply plugin: "groovy"
 
 repositories {
 	mavenCentral()
-	mavenRepo urls: "https://nexus.codehaus.org/content/repositories/snapshots"
+	maven { url "https://nexus.codehaus.org/content/repositories/snapshots" }
 }
 
 configurations {
@@ -34,10 +34,10 @@ dependencies {
 
 drivers.each { driver ->
 	task "${driver}Test"(type: Test) {
-		testReportDir = file("$reportsDir/$name/tests")
+		testReportDir = reporting.file("$name/tests")
 		testResultsDir = file("$buildDir/test-results/$name")
 		
-		systemProperty "geb.build.reportsDir", "$reportsDir/$name/geb"
+		systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
 		systemProperty "geb.env", driver
 		
 		// If you wanted to set the baseUrl in your build…
