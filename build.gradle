@@ -6,16 +6,20 @@ repositories {
 }
 
 configurations {
-	testCompile.transitive = true
+	all {
+		resolutionStrategy {
+			cacheChangingModulesFor 0, 'seconds'
+		}
+	}
 }
 
 // The drivers we want to use
-drivers = ["htmlunit", "firefox", "chrome"]
+ext.drivers = ["htmlunit", "firefox", "chrome"]
 
 dependencies {
-	groovy "org.codehaus.groovy:groovy-all:1.8.6"
+	groovy "org.codehaus.groovy:groovy-all:1.7.10"
 	
-	def gebVersion = "0.6.3"
+	def gebVersion = "0.7.0-SNAPSHOT"
 	def seleniumVersion = "2.20.0"
 
 	// If using Spock, need to depend on geb-spock
