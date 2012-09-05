@@ -3,25 +3,25 @@ import geb.*
 import geb.spock.*
 
 class GoogleSpec extends GebReportingSpec {
-		
-	def "the first link should be wikipedia"() {
-		when:
-		to GoogleHomePage
-		
-		and:
-		search.forTerm "wikipedia"
 
-		then:
-		at GoogleResultsPage
+    def "the first link should be wikipedia"() {
+        when:
+        to GoogleHomePage
 
-		and:
-		firstResultLink.text() == "Wikipedia"
+        and:
+        q = "wikipedia"
 
-		when:
-		firstResultLink.click()
+        then:
+        at GoogleResultsPage
 
-		then:
-		waitFor { at WikipediaPage }
-	}
-	
+        and:
+        firstResultLink.text() == "Wikipedia"
+
+        when:
+        firstResultLink.click()
+
+        then:
+        waitFor { at WikipediaPage }
+    }
+
 }

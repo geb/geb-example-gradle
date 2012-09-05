@@ -7,29 +7,25 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4)
 class GoogleTest extends GebReportingTest {
-	
-	@Test 
-	void theFirstLinkShouldBeWikipedia() {
-		to GoogleHomePage
 
-		
-		waitFor { 1 == 2 }
-		// enter wikipedia into the search field
-		search.forTerm "wikipedia"
+    @Test
+    void theFirstLinkShouldBeWikipedia() {
+        to GoogleHomePage
 
-		// wait for the change to results page to happen
-		// (google updates the page without a new request)
-		at(GoogleResultsPage)
+        // enter wikipedia into the search field
+        q = "wikipedia"
 
-		// is the first link to wikipedia?
-		firstResultLink.text() == "Wikipedia"
+        // wait for the change to results page to happen
+        // (google updates the page without a new request)
+        at GoogleResultsPage
 
-		// click the link
-		firstResultLink.click()
+        // is the first link to wikipedia?
+        firstResultLink.text() == "Wikipedia"
 
-		// wait for Google's javascript to redirect us
-		// to wikipedia
-		waitFor { at WikipediaPage }
-	}
-	
+        // click the link
+        firstResultLink.click()
+
+        waitFor { at WikipediaPage }
+    }
+
 }

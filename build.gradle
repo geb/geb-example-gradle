@@ -1,56 +1,48 @@
 apply plugin: "groovy"
+apply plugin: "idea"
 
 repositories {
-	mavenCentral()
-	maven { url "https://nexus.codehaus.org/content/repositories/snapshots" }
-}
-
-configurations {
-	all {
-		resolutionStrategy {
-			cacheChangingModulesFor 0, 'seconds'
-		}
-	}
+    mavenCentral()
 }
 
 // The drivers we want to use
-ext.drivers = ["htmlunit", "firefox", "chrome"]
+ext.drivers = ["firefox", "chrome"]
 
 dependencies {
-	groovy "org.codehaus.groovy:groovy-all:1.8.6"
-	
-	def gebVersion = "0.7.2"
-	def seleniumVersion = "2.25.0"
+    groovy "org.codehaus.groovy:groovy-all:1.8.6"
 
-	// If using Spock, need to depend on geb-spock
-	testCompile "org.codehaus.geb:geb-spock:$gebVersion"
-	testCompile "org.spockframework:spock-core:0.6-groovy-1.8"
-	
-	// If using JUnit, need to depend on geb-junit (3 or 4)
-	testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
-	testCompile "junit:junit-dep:4.8.2"
-	
-	// Drivers
-	drivers.each { driver ->
-		testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
-	}
+    def gebVersion = "0.7.2"
+    def seleniumVersion = "2.25.0"
+
+    // If using Spock, need to depend on geb-spock
+    testCompile "org.codehaus.geb:geb-spock:$gebVersion"
+    testCompile "org.spockframework:spock-core:0.6-groovy-1.8"
+
+    // If using JUnit, need to depend on geb-junit (3 or 4)
+    testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
+    testCompile "junit:junit-dep:4.8.2"
+
+    // Drivers
+    drivers.each { driver ->
+        testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
+    }
 }
 
 drivers.each { driver ->
-	task "${driver}Test"(type: Test) {
-		testReportDir = reporting.file("$name/tests")
-		testResultsDir = file("$buildDir/test-results/$name")
-		
-		systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
-		systemProperty "geb.env", driver
-		
-		// If you wanted to set the baseUrl in your build…
-		// systemProperty "geb.build.baseUrl", "http://myapp.com"
-	}
+    task "${driver}Test"(type: Test) {
+        testReportDir = reporting.file("$name/tests")
+        testResultsDir = file("$buildDir/test-results/$name")
+
+        systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+        systemProperty "geb.env", driver
+
+        // If you wanted to set the baseUrl in your build…
+        // systemProperty "geb.build.baseUrl", "http://myapp.com"
+    }
 }
 
 task test(overwrite: true, dependsOn: drivers.collect { tasks["${it}Test"] })
 
 task wrapper(type: Wrapper) {
-	gradleVersion = '1.1'
+    gradleVersion = '1.1'
 }
