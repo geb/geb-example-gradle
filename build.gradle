@@ -9,18 +9,15 @@ repositories {
 ext.drivers = ["firefox", "chrome"]
 
 dependencies {
-    groovy "org.codehaus.groovy:groovy-all:1.8.6"
-
-    def gebVersion = "0.7.2"
-    def seleniumVersion = "2.26.0"
+    def gebVersion = "0.9.0-RC-3"
+    def seleniumVersion = "2.30.0"
 
     // If using Spock, need to depend on geb-spock
-    testCompile "org.codehaus.geb:geb-spock:$gebVersion"
-    testCompile "org.spockframework:spock-core:0.6-groovy-1.8"
+    testCompile "org.gebish:geb-spock:$gebVersion"
+    testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
-    testCompile "org.codehaus.geb:geb-junit4:$gebVersion"
-    testCompile "junit:junit-dep:4.8.2"
+    testCompile "org.gebish:geb-junit4:$gebVersion"
 
     // Drivers
     drivers.each { driver ->
@@ -41,8 +38,11 @@ drivers.each { driver ->
     }
 }
 
-task test(overwrite: true, dependsOn: drivers.collect { tasks["${it}Test"] })
+test {
+	dependsOn drivers.collect { tasks["${it}Test"] }
+	enabled = false
+}
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.1'
+    gradleVersion = '1.5'
 }
