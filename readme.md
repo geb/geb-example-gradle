@@ -11,3 +11,7 @@ The following commands will launch the tests with the individual browsers:
 To run with all, you can run:
 
     ./gradlew test
+
+If you install phantomjs, you can also do:
+    ./gradlew phantomTest
+
