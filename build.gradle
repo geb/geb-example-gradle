@@ -10,7 +10,7 @@ ext.drivers = ["firefox", "chrome"]
 
 dependencies {
     def gebVersion = "0.9.0-RC-3"
-    def seleniumVersion = "2.30.0"
+    def seleniumVersion = "2.31.0"
 
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
@@ -22,6 +22,12 @@ dependencies {
     // Drivers
     drivers.each { driver ->
         testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
+    }
+
+    /* for PhantomJS */
+    testCompile "org.seleniumhq.selenium:selenium-remote-driver:$seleniumVersion"
+    testCompile("com.github.detro.ghostdriver:phantomjsdriver:1.0.3")  {
+        transitive = false
     }
 }
 
@@ -41,6 +47,15 @@ drivers.each { driver ->
 test {
 	dependsOn drivers.collect { tasks["${it}Test"] }
 	enabled = false
+}
+
+task phantomTest(type:Test) {
+    testReportDir = reporting.file("phantom/tests")
+    testResultsDir = file("$buildDir/test-results/$name")
+
+    systemProperty "geb.build.reportsDir", reporting.file("phantom/geb")
+    systemProperty "geb.env", "phantom"
+    systemProperty "geb.build.baseUrl", System.properties['geb.build.baseUrl']
 }
 
 task wrapper(type: Wrapper) {
