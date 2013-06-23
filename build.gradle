@@ -55,7 +55,6 @@ task phantomTest(type:Test) {
 
     systemProperty "geb.build.reportsDir", reporting.file("phantom/geb")
     systemProperty "geb.env", "phantom"
-    systemProperty "geb.build.baseUrl", System.properties['geb.build.baseUrl']
 }
 
 task wrapper(type: Wrapper) {
