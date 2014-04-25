@@ -10,7 +10,7 @@ ext.drivers = ["firefox", "chrome"]
 
 dependencies {
     def gebVersion = "0.9.2"
-    def seleniumVersion = "2.30.0"
+    def seleniumVersion = "2.41.0"
 
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
