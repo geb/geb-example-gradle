@@ -13,9 +13,9 @@ dependencies {
     def seleniumVersion = "2.42.2"
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
-    testCompile ('org.spockframework:spock-core:0.7-groovy-2.0') {  
-        exclude group: 'org.codehaus.groovy'  
-        }
+    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
+        exclude group: 'org.codehaus.groovy'
+    }
     testCompile "org.codehaus.groovy:groovy-all:2.3.4"
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
@@ -43,6 +43,17 @@ drivers.each { driver ->
 }
 
 test {
-	dependsOn drivers.collect { tasks["${it}Test"] }
-	enabled = false
+    dependsOn drivers.collect { tasks["${it}Test"] }
+    enabled = false
+}
+
+idea {
+    project {
+        ipr {
+            withXml { provider ->
+                def node = provider.asNode()
+                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
+            }
+        }
+    }
 }
