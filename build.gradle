@@ -1,5 +1,7 @@
 apply plugin: "groovy"
 apply plugin: "idea"
+apply from: 'gradle/idea.gradle'
+apply from: 'gradle/ci.gradle'
 
 repositories {
     jcenter()
@@ -45,15 +47,4 @@ drivers.each { driver ->
 test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
-}
-
-idea {
-    project {
-        ipr {
-            withXml { provider ->
-                def node = provider.asNode()
-                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
-            }
-        }
-    }
 }
