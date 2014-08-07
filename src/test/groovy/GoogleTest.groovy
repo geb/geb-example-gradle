@@ -20,7 +20,7 @@ class GoogleTest extends GebReportingTest {
         at GoogleResultsPage
 
         // is the first link to wikipedia?
-        firstResultLink.text() == "Wikipedia"
+        assert firstResultLink.text() == "Wikipedia, the free encyclopedia"
 
         // click the link
         firstResultLink.click()
