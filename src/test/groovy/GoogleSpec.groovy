@@ -15,7 +15,7 @@ class GoogleSpec extends GebReportingSpec {
         at GoogleResultsPage
 
         and:
-        firstResultLink.text() == "Wikipedia, the free encyclopedia"
+        firstResultLink.text() == "Wikipedia"
 
         when:
         firstResultLink.click()

@@ -1,7 +1,20 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+import org.apache.commons.io.FileUtils
+
 apply plugin: "groovy"
 apply plugin: "idea"
-apply from: 'gradle/idea.gradle'
-apply from: 'gradle/ci.gradle'
+apply from: "gradle/idea.gradle"
+apply from: "gradle/ci.gradle"
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "commons-io:commons-io:2.4"
+    }
+}
 
 repositories {
     jcenter()
@@ -15,8 +28,8 @@ dependencies {
     def seleniumVersion = "2.42.2"
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
-    testCompile('org.spockframework:spock-core:0.7-groovy-2.0') {
-        exclude group: 'org.codehaus.groovy'
+    testCompile("org.spockframework:spock-core:0.7-groovy-2.0") {
+        exclude group: "org.codehaus.groovy"
     }
     testCompile "org.codehaus.groovy:groovy-all:2.3.4"
 
@@ -27,6 +40,34 @@ dependencies {
     drivers.each { driver ->
         testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
     }
+}
+
+task downloadChromeDriver {
+    def chromeDriverVersion = "2.10"
+    def outputFile = file("gradle/webdriver/webdriver.zip")
+    outputs.file(outputFile)
+
+    doLast {
+        def driverOsFilenamePart
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+            driverOsFilenamePart = "win32"
+        } else if (Os.isFamily(Os.FAMILY_MAC)) {
+            driverOsFilenamePart = "mac32"
+        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
+            driverOsFilenamePart = Os.isArch("amd64") ? "linux64" : "linux32"
+        }
+        FileUtils.copyURLToFile(new URL("http://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${driverOsFilenamePart}.zip"), outputFile)
+    }
+
+}
+
+task unzipChromeDriver(type: Copy) {
+    def outputDir = file("gradle/webdriver/unzipped")
+    dependsOn downloadChromeDriver
+    outputs.dir(outputDir)
+
+    from(zipTree(downloadChromeDriver.outputs.files.singleFile))
+    into(outputDir)
 }
 
 drivers.each { driver ->
@@ -44,6 +85,11 @@ drivers.each { driver ->
         // If you wanted to set the baseUrl in your build…
         // systemProperty "geb.build.baseUrl", "http://myapp.com"
     }
+}
+
+chromeTest {
+    dependsOn unzipChromeDriver
+    systemProperty "webdriver.chrome.driver", fileTree(unzipChromeDriver.outputs.files.singleFile).singleFile
 }
 
 test {

@@ -20,8 +20,4 @@ if (System.getenv('DRONE')) {
             }
         }
     }
-
-    tasks.matching { it.name == 'chromeTest' }.all {
-        systemProperty 'webdriver.chrome.driver', '/usr/local/bin/chromedriver'
-    }
 }
