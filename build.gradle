@@ -90,7 +90,7 @@ drivers.each { driver ->
 
 chromeTest {
     dependsOn unzipChromeDriver
-    systemProperty "webdriver.chrome.driver", fileTree(unzipChromeDriver.outputs.files.singleFile).singleFile
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, "chromedriver")
 }
 
 test {
