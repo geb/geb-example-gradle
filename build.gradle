@@ -35,7 +35,7 @@ drivers.each { driver ->
             html.destination = reporting.file("$name/tests")
             junitXml.destination = file("$buildDir/test-results/$name")
         }
-        
+
         outputs.upToDateWhen { false }  // Always run tests
 
         systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
