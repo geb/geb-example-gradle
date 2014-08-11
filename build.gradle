@@ -90,8 +90,9 @@ drivers.each { driver ->
 }
 
 chromeTest {
+    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
     dependsOn unzipChromeDriver
-    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, "chromedriver")
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename)
 }
 
 test {
