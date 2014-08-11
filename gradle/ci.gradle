@@ -9,19 +9,18 @@ if (System.getenv('DRONE')) {
         resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
     }
 
-    project.afterEvaluate {
-        configurations.all { configuration ->
-            def deps = dependencies.toList().findAll { it instanceof ModuleDependency && it.group == "org.gebish" }
-            deps.each { dependency ->
-                dependencies.remove(dependency)
-                project.dependencies {
-                    delegate."$configuration.name" "${dependency.group}:${dependency.name}:(,1.0["
-                }
+    configurations.all { configuration ->
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == "org.gebish") {
+                details.useVersion "(,1.0["
             }
         }
+    }
 
+    project.afterEvaluate {
         downloadChromeDriver.chromeDriverVersion = "2.8"
     }
+
     tasks.withType(Test) {
         testLogging {
             exceptionFormat = 'full'
