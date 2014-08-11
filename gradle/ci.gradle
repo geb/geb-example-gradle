@@ -20,4 +20,9 @@ if (System.getenv('DRONE')) {
             }
         }
     }
+    tasks.withType(Test) {
+        testLogging {
+            exceptionFormat = 'full'
+        }
+    }
 }
