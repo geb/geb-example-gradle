@@ -43,7 +43,7 @@ dependencies {
 }
 
 task downloadChromeDriver {
-    def chromeDriverVersion = "2.9"
+    def chromeDriverVersion = "2.8"
     def outputFile = file("gradle/webdriver/webdriver.zip")
     outputs.file(outputFile)
 
