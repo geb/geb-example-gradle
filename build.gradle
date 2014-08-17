@@ -1,10 +1,4 @@
 import org.apache.tools.ant.taskdefs.condition.Os
-import org.apache.commons.io.FileUtils
-
-apply plugin: "groovy"
-apply plugin: "idea"
-apply from: "gradle/idea.gradle"
-apply from: "gradle/ci.gradle"
 
 buildscript {
     repositories {
@@ -16,60 +10,47 @@ buildscript {
     }
 }
 
+ext {
+    // The drivers we want to use
+    drivers = ["firefox", "chrome", "phantomJs"]
+
+    ext {
+        groovyVersion = '2.3.6'
+        gebVersion = '0.9.3'
+        seleniumVersion = '2.42.2'
+        chromeDriverVersion = '2.10'
+        phantomJsVersion = '1.9.7'
+    }
+}
+
+apply plugin: "groovy"
+apply plugin: "idea"
+apply from: "gradle/idea.gradle"
+apply from: "gradle/ci.gradle"
+apply from: "gradle/osSpecificDownloads.gradle"
+
 repositories {
     jcenter()
 }
 
-// The drivers we want to use
-ext.drivers = ["firefox", "chrome"]
-
 dependencies {
-    def gebVersion = "0.9.3"
-    def seleniumVersion = "2.42.2"
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
     testCompile("org.spockframework:spock-core:0.7-groovy-2.0") {
         exclude group: "org.codehaus.groovy"
     }
-    testCompile "org.codehaus.groovy:groovy-all:2.3.4"
+    testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
     testCompile "org.gebish:geb-junit4:$gebVersion"
 
     // Drivers
-    drivers.each { driver ->
-        testCompile "org.seleniumhq.selenium:selenium-$driver-driver:$seleniumVersion"
+    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
+    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
+    testCompile("com.github.detro.ghostdriver:phantomjsdriver:1.1.0") {
+        // phantomjs driver pulls in a different selenium version
+        transitive = false
     }
-}
-
-task downloadChromeDriver {
-    ext {
-        chromeDriverVersion = "2.10"
-    }
-    def outputFile = file("gradle/webdriver/webdriver.zip")
-    outputs.file(outputFile)
-
-    doLast {
-        def driverOsFilenamePart
-        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-            driverOsFilenamePart = "win32"
-        } else if (Os.isFamily(Os.FAMILY_MAC)) {
-            driverOsFilenamePart = "mac32"
-        } else if (Os.isFamily(Os.FAMILY_UNIX)) {
-            driverOsFilenamePart = Os.isArch("amd64") ? "linux64" : "linux32"
-        }
-        FileUtils.copyURLToFile(new URL("http://chromedriver.storage.googleapis.com/${chromeDriverVersion}/chromedriver_${driverOsFilenamePart}.zip"), outputFile)
-    }
-
-}
-
-task unzipChromeDriver(type: Copy) {
-    def outputDir = file("gradle/webdriver/unzipped")
-    dependsOn downloadChromeDriver
-    outputs.dir(outputDir)
-
-    from(zipTree(downloadChromeDriver.outputs.files.singleFile))
-    into(outputDir)
 }
 
 drivers.each { driver ->
@@ -90,9 +71,17 @@ drivers.each { driver ->
 }
 
 chromeTest {
-    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
     dependsOn unzipChromeDriver
-    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename)
+
+    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+}
+
+phantomJsTest {
+    dependsOn unzipPhantomJs
+
+    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "phantomjs.exe" : "bin/phantomjs"
+    systemProperty "phantomjs.binary.path", new File(unzipPhantomJs.outputs.files.singleFile, phantomJsFilename).absolutePath
 }
 
 test {
