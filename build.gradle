@@ -1,15 +1,5 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath "commons-io:commons-io:2.4"
-    }
-}
-
 ext {
     // The drivers we want to use
     drivers = ["firefox", "chrome", "phantomJs"]
