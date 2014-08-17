@@ -24,7 +24,6 @@ ext {
 }
 
 apply plugin: "groovy"
-apply plugin: "idea"
 apply from: "gradle/idea.gradle"
 apply from: "gradle/ci.gradle"
 apply from: "gradle/osSpecificDownloads.gradle"
