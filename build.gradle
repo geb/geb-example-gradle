@@ -6,7 +6,7 @@ ext {
 
     ext {
         groovyVersion = '2.4.1'
-        gebVersion = '0.11.0'
+        gebVersion = '0.12.0'
         seleniumVersion = '2.46.0'
         chromeDriverVersion = '2.10'
         phantomJsVersion = '1.9.7'
@@ -19,7 +19,7 @@ apply from: "gradle/ci.gradle"
 apply from: "gradle/osSpecificDownloads.gradle"
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
