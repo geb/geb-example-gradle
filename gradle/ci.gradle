@@ -9,7 +9,7 @@ if (System.getenv('DRONE')) {
         resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
     }
 
-    gebVersion = "(,1.0["
+    gebVersion = "+"
     chromeDriverVersion = "2.8"
 
     tasks.withType(Test) {
