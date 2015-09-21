@@ -15,7 +15,6 @@ ext {
 
 apply plugin: "groovy"
 apply from: "gradle/idea.gradle"
-apply from: "gradle/ci.gradle"
 apply from: "gradle/osSpecificDownloads.gradle"
 
 repositories {
@@ -78,3 +77,5 @@ test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
 }
+
+apply from: "gradle/ci.gradle"
