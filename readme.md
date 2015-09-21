@@ -1,4 +1,4 @@
-[![Build Status](https://drone.io/github.com/geb/geb-example-gradle/status.png)](https://drone.io/github.com/geb/geb-example-gradle/latest)
+[![Build Status](https://snap-ci.com/geb/geb-example-gradle/branch/master/build_image)](https://snap-ci.com/geb/geb-example-gradle/branch/master)
 
 # Description
 
