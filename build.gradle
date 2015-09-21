@@ -5,8 +5,8 @@ ext {
     drivers = ["firefox", "chrome", "phantomJs"]
 
     ext {
-        groovyVersion = '2.4.1'
-        gebVersion = '0.12.2'
+        groovyVersion = '2.4.4'
+        gebVersion = '+'
         seleniumVersion = '2.46.0'
         chromeDriverVersion = '2.10'
         phantomJsVersion = '1.9.7'
@@ -17,7 +17,14 @@ apply plugin: "groovy"
 apply from: "gradle/idea.gradle"
 apply from: "gradle/osSpecificDownloads.gradle"
 
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+}
+
 repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
     mavenCentral()
 }
 
