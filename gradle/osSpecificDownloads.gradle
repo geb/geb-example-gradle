@@ -20,7 +20,7 @@ task downloadChromeDriver {
 		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
 			driverOsFilenamePart = "win32"
 		} else if (Os.isFamily(Os.FAMILY_MAC)) {
-			driverOsFilenamePart = "mac32"
+			driverOsFilenamePart = "mac64"
 		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
 			driverOsFilenamePart = Os.isArch("amd64") ? "linux64" : "linux32"
 		}
