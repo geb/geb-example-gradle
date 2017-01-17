@@ -6,7 +6,7 @@ buildscript {
 		jcenter()
 	}
 	dependencies {
-		classpath "commons-io:commons-io:2.4"
+		classpath "commons-io:commons-io:2.5"
 	}
 }
 
