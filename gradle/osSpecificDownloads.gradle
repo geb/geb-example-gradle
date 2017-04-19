@@ -10,6 +10,33 @@ buildscript {
 	}
 }
 
+task downloadGeckoDriver {
+	def outputFile = file("$buildDir/webdriver/geckodriver.tar.gz")
+	inputs.property("geckodriver", geckoDriverVersion)
+	outputs.file(outputFile)
+
+	doLast {
+		def driverOsFilenamePart
+		if (Os.isFamily(Os.FAMILY_WINDOWS)) {
+			driverOsFilenamePart = "win64"
+		} else if (Os.isFamily(Os.FAMILY_MAC)) {
+			driverOsFilenamePart = "macos"
+		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
+			driverOsFilenamePart = "linux64"
+		}
+		FileUtils.copyURLToFile(new URL("https://github.com/mozilla/geckodriver/releases/download/${geckoDriverVersion}/geckodriver-${geckoDriverVersion}-${driverOsFilenamePart}.tar.gz"), outputFile)
+	}
+}
+
+task unzipGeckoDriver(type: Copy) {
+	def outputDir = file("$buildDir/webdriver/geckodriver")
+	dependsOn downloadGeckoDriver
+	outputs.dir(outputDir)
+
+	from(tarTree(downloadGeckoDriver.outputs.files.singleFile))
+	into(outputDir)
+}
+
 task downloadChromeDriver {
 	def outputFile = file("$buildDir/webdriver/chromedriver.zip")
 	inputs.property("chromeDriverVersion", chromeDriverVersion)
