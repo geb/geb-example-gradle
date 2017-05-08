@@ -10,13 +10,10 @@ class GebishOrgTest extends GebReportingTest {
     void canGetToTheCurrentBookOfGeb() {
         to GebishOrgHomePage
 
-        //hover over to expand the menu
-        interact {
-            moveToElement(manualsMenu.toggle)
-        }
+        manualsMenu.open()
 
         //first link is for the current manual
-        assert manualsMenu.links[0].text().endsWith("- CURRENT")
+        assert manualsMenu.links[0].text().startsWith("current")
 
         manualsMenu.links[0].click()
 
