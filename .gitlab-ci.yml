@@ -1,0 +1,21 @@
+---
+image: gebish/ci:v3
+
+variables:
+  GRADLE_USER_HOME: .gradle-home
+
+check:
+  stage: build
+  cache:
+    key: "$CI_JOB_NAME"
+    paths:
+      - .gradle-home
+  artifacts:
+    when: always
+    expire_in: 4 weeks
+    paths:
+      - build/reports
+  script:
+    - Xvfb :99 -screen 1 1280x1024x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
+    - export DISPLAY=:99
+    - ./gradlew --no-daemon check

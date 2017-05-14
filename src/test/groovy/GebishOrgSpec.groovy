@@ -1,18 +1,16 @@
-import geb.spock.GebReportingSpec
+import geb.spock.GebSpec
 
-class GebishOrgSpec extends GebReportingSpec {
+class GebishOrgSpec extends GebSpec {
 
     def "can get to the current Book of Geb"() {
         when:
         to GebishOrgHomePage
 
-        and: //hover over to expand the menu
-        interact {
-            moveToElement(manualsMenu.toggle)
-        }
+        and:
+        manualsMenu.open()
 
-        then: //first link is for the current manual
-        manualsMenu.links[0].text().endsWith("- CURRENT")
+        then:
+        manualsMenu.links[0].text().startsWith("current")
 
         when:
         manualsMenu.links[0].click()
