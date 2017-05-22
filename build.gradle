@@ -7,8 +7,9 @@ ext {
     ext {
         groovyVersion = '2.4.8'
         gebVersion = '1.1.1'
-        seleniumVersion = '2.53.0'
+        seleniumVersion = '3.3.1'
         chromeDriverVersion = '2.24'
+        geckoDriverVersion = 'v0.15.0'
         phantomJsVersion = '2.1.1'
     }
 }
@@ -57,6 +58,13 @@ drivers.each { driver ->
         // If you wanted to set the baseUrl in your build…
         // systemProperty "geb.build.baseUrl", "http://myapp.com"
     }
+}
+
+firefoxTest {
+    dependsOn unzipGeckoDriver
+    def geckodriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "geckodriver.exe" : "geckodriver"
+    def geckodriverFile = new File(unzipGeckoDriver.outputs.files.singleFile, geckodriverFilename)
+    systemProperty "webdriver.gecko.driver", geckodriverFile.absolutePath
 }
 
 chromeTest {
