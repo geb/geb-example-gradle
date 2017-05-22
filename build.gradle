@@ -9,7 +9,7 @@ ext {
         gebVersion = '1.1.1'
         seleniumVersion = '3.4.0'
         chromeDriverVersion = '2.24'
-        geckoDriverVersion = 'v0.16.1'
+        geckoDriverVersion = '0.16.1'
         phantomJsVersion = '2.1.1'
     }
 }
