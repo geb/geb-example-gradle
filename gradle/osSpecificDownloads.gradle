@@ -24,7 +24,7 @@ task downloadGeckoDriver {
 		} else if (Os.isFamily(Os.FAMILY_UNIX)) {
 			driverOsFilenamePart = "linux64"
 		}
-		FileUtils.copyURLToFile(new URL("https://github.com/mozilla/geckodriver/releases/download/${geckoDriverVersion}/geckodriver-${geckoDriverVersion}-${driverOsFilenamePart}.tar.gz"), outputFile)
+		FileUtils.copyURLToFile(new URL("https://github.com/mozilla/geckodriver/releases/download/v${geckoDriverVersion}/geckodriver-v${geckoDriverVersion}-${driverOsFilenamePart}.tar.gz"), outputFile)
 	}
 }
 
