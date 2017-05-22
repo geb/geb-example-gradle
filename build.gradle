@@ -7,9 +7,9 @@ ext {
     ext {
         groovyVersion = '2.4.8'
         gebVersion = '1.1.1'
-        seleniumVersion = '3.3.1'
+        seleniumVersion = '3.4.0'
         chromeDriverVersion = '2.24'
-        geckoDriverVersion = 'v0.15.0'
+        geckoDriverVersion = 'v0.16.1'
         phantomJsVersion = '2.1.1'
     }
 }
@@ -37,7 +37,7 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
     // using a custom version of phantomjs driver for now as the original one does not support WebDriver > 2.43.1
-    testCompile("com.codeborne:phantomjsdriver:1.3.0") {
+    testCompile("com.codeborne:phantomjsdriver:1.4.3") {
         // phantomjs driver pulls in a different selenium version
         transitive = false
     }
