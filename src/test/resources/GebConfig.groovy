@@ -7,7 +7,10 @@
 
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.firefox.FirefoxOptions
+import org.openqa.selenium.firefox.FirefoxProfile
 import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.remote.DesiredCapabilities
 
 waiting {
 	timeout = 2
@@ -26,7 +29,18 @@ environments {
 	firefox {
 		atCheckWaiting = 1
 
-		driver = { new FirefoxDriver() }
+		driver = {
+			FirefoxProfile profile = new FirefoxProfile();
+			// this avoids the "Your are signing in to..." alert
+			profile.setPreference("signon.autologin.proxy", true);
+			
+			DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+			desiredCapabilities.setCapability('acceptInsecureCerts', true);
+			
+			FirefoxOptions options = new FirefoxOptions().setProfile(profile).addCapabilities(desiredCapabilities);
+			
+			new FirefoxDriver(options)
+		}
 	}
 
     phantomJs {
