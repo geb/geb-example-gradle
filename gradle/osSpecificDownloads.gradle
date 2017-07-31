@@ -36,10 +36,11 @@ task unzipGeckoDriver(type: Copy) {
 	dependsOn downloadGeckoDriver
 	outputs.dir(outputDir)
 
-	if (downloadGeckoDriver.outputs.files.singleFile.getName().endsWith("zip")) {
-		from(zipTree(downloadGeckoDriver.outputs.files.singleFile))
+	def driverArchive = downloadGeckoDriver.outputs.files.singleFile
+	if (driverArchive.getName().endsWith("zip")) {
+		from(zipTree(driverArchive))
 	} else {
-		from(tarTree(downloadGeckoDriver.outputs.files.singleFile))
+		from(tarTree(driverArchive))
 	}
 	into(outputDir)
 }
