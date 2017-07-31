@@ -84,7 +84,7 @@ chromeTest {
 phantomJsTest {
     dependsOn unzipPhantomJs
 
-    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "phantomjs.exe" : "bin/phantomjs"
+    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "bin/phantomjs.exe" : "bin/phantomjs"
     systemProperty "phantomjs.binary.path", new File(unzipPhantomJs.outputs.files.singleFile, phantomJsFilename).absolutePath
 }
 
