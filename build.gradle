@@ -5,11 +5,11 @@ ext {
     drivers = ["firefox", "chrome", "phantomJs"]
 
     ext {
-        groovyVersion = '2.4.8'
+        groovyVersion = '2.4.12'
         gebVersion = '1.1.1'
         seleniumVersion = '3.4.0'
-        chromeDriverVersion = '2.29'
-        geckoDriverVersion = '0.16.1'
+        chromeDriverVersion = '2.31'
+        geckoDriverVersion = '0.18.0'
         phantomJsVersion = '2.1.1'
     }
 }
@@ -25,7 +25,7 @@ repositories {
 dependencies {
     // If using Spock, need to depend on geb-spock
     testCompile "org.gebish:geb-spock:$gebVersion"
-    testCompile("org.spockframework:spock-core:1.0-groovy-2.4") {
+    testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
         exclude group: "org.codehaus.groovy"
     }
     testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
