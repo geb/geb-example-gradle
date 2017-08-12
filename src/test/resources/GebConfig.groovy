@@ -6,6 +6,7 @@
 
 
 import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 
@@ -19,6 +20,16 @@ environments {
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chrome {
 		driver = { new ChromeDriver() }
+	}
+
+	// run via “./gradlew chromeHeadlessTest”
+	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
+	chromeHeadless {
+		driver = {
+			ChromeOptions o = new ChromeOptions()
+			o.addArguments('headless')
+			new ChromeDriver(o)
+		}
 	}
 	
 	// run via “./gradlew firefoxTest”
