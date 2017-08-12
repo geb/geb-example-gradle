@@ -2,7 +2,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 ext {
     // The drivers we want to use
-    drivers = ["firefox", "chrome", "phantomJs"]
+    drivers = ["firefox", "chrome", "chromeHeadless", "phantomJs"]
 
     ext {
         groovyVersion = '2.4.12'
@@ -74,11 +74,13 @@ firefoxTest {
     systemProperty "webdriver.gecko.driver", geckodriverFile.absolutePath
 }
 
-chromeTest {
-    dependsOn unzipChromeDriver
+drivers.findAll{it =~ /^chrome.*/}.each { chromeTask ->
+    "${chromeTask}Test" {
+        dependsOn unzipChromeDriver
 
-    def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
-    systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+        def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
+        systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
+    }
 }
 
 phantomJsTest {
