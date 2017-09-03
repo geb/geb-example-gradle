@@ -1,5 +1,5 @@
 ---
-image: gebish/ci:v4
+image: gebish/ci:v5
 
 variables:
   GRADLE_USER_HOME: .gradle-home
