@@ -52,18 +52,10 @@ webdriverBinaries {
 
 drivers.each { driver ->
     task "${driver}Test"(type: Test) {
-        reports {
-            html.destination = reporting.file("$name/tests")
-            junitXml.destination = file("$buildDir/test-results/$name")
-        }
-
         outputs.upToDateWhen { false }  // Always run tests
 
-        systemProperty "geb.build.reportsDir", reporting.file("$name/geb")
+        systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
-
-        // If you wanted to set the baseUrl in your build…
-        // systemProperty "geb.build.baseUrl", "http://myapp.com"
     }
 }
 
