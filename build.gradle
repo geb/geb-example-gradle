@@ -2,6 +2,7 @@ plugins {
     id "idea"
     id "groovy"
     id "com.energizedwork.webdriver-binaries" version "1.0"
+    id "com.energizedwork.idea-base" version "1.2"
 }
 
 ext {
@@ -69,15 +70,4 @@ drivers.each { driver ->
 test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
-}
-
-idea {
-    project {
-        ipr {
-            withXml { provider ->
-                def node = provider.asNode()
-                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
-            }
-        }
-    }
 }
