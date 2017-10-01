@@ -71,37 +71,3 @@ task unzipChromeDriver(type: Copy) {
 	from(zipTree(downloadChromeDriver.outputs.files.singleFile))
 	into(outputDir)
 }
-
-task downloadPhantomJs {
-	def osFilenamePart
-	if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-		osFilenamePart = "windows.zip"
-	} else if (Os.isFamily(Os.FAMILY_MAC)) {
-		osFilenamePart = "macosx.zip"
-	} else if (Os.isFamily(Os.FAMILY_UNIX)) {
-		osFilenamePart = Os.isArch("amd64") ? "linux-x86_64.tar.bz2" : "linux-i686.tar.bz2"
-	}
-
-	def filename = "phantomjs-$phantomJsVersion-$osFilenamePart"
-	def outputFile = file("$buildDir/webdriver/$filename")
-	inputs.property("phantomJsVersion", phantomJsVersion)
-	outputs.file(outputFile)
-
-	doLast {
-		FileUtils.copyURLToFile(new URL("https://bitbucket.org/ariya/phantomjs/downloads/$filename"), outputFile)
-	}
-}
-
-task unzipPhantomJs(type: Copy) {
-	def outputDir = file("$buildDir/webdriver/phantomjs")
-	dependsOn downloadPhantomJs
-	outputs.dir(outputDir)
-
-	def archive = downloadPhantomJs.outputs.files.singleFile
-
-	from(Os.isFamily(Os.FAMILY_MAC) || Os.isFamily(Os.FAMILY_WINDOWS) ? zipTree(archive) : tarTree(archive))
-	into(outputDir)
-	eachFile { FileCopyDetails fcp ->
-		fcp.relativePath = new RelativePath(!fcp.directory, *fcp.relativePath.segments[1..-1])
-	}
-}

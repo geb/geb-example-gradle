@@ -2,7 +2,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 ext {
     // The drivers we want to use
-    drivers = ["firefox", "chrome", "chromeHeadless", "phantomJs"]
+    drivers = ["firefox", "chrome", "chromeHeadless"]
 
     ext {
         groovyVersion = '2.4.12'
@@ -10,7 +10,6 @@ ext {
         seleniumVersion = '3.5.3'
         chromeDriverVersion = '2.32'
         geckoDriverVersion = '0.18.0'
-        phantomJsVersion = '2.1.1'
     }
 }
 
@@ -43,11 +42,6 @@ dependencies {
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
-    // using a custom version of phantomjs driver for now as the original one does not support WebDriver > 2.43.1
-    testCompile("com.codeborne:phantomjsdriver:1.4.3") {
-        // phantomjs driver pulls in a different selenium version
-        transitive = false
-    }
 }
 
 drivers.each { driver ->
@@ -81,13 +75,6 @@ drivers.findAll{it =~ /^chrome.*/}.each { chromeTask ->
         def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
         systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
     }
-}
-
-phantomJsTest {
-    dependsOn unzipPhantomJs
-
-    def phantomJsFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "bin/phantomjs.exe" : "bin/phantomjs"
-    systemProperty "phantomjs.binary.path", new File(unzipPhantomJs.outputs.files.singleFile, phantomJsFilename).absolutePath
 }
 
 test {
