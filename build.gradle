@@ -81,5 +81,3 @@ test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
 }
-
-apply from: "gradle/ci.gradle"
