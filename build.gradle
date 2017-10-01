@@ -1,4 +1,8 @@
-import org.apache.tools.ant.taskdefs.condition.Os
+plugins {
+    id "idea"
+    id "groovy"
+    id "com.energizedwork.webdriver-binaries" version "1.0"
+}
 
 ext {
     // The drivers we want to use
@@ -12,10 +16,6 @@ ext {
         geckoDriverVersion = '0.18.0'
     }
 }
-
-apply plugin: "groovy"
-apply from: "gradle/idea.gradle"
-apply from: "gradle/osSpecificDownloads.gradle"
 
 configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
@@ -44,6 +44,11 @@ dependencies {
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
 }
 
+webdriverBinaries {
+    chromedriver chromeDriverVersion
+    geckodriver geckoDriverVersion
+}
+
 drivers.each { driver ->
     task "${driver}Test"(type: Test) {
         reports {
@@ -61,23 +66,18 @@ drivers.each { driver ->
     }
 }
 
-firefoxTest {
-    dependsOn unzipGeckoDriver
-    def geckodriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "geckodriver.exe" : "geckodriver"
-    def geckodriverFile = new File(unzipGeckoDriver.outputs.files.singleFile, geckodriverFilename)
-    systemProperty "webdriver.gecko.driver", geckodriverFile.absolutePath
-}
-
-drivers.findAll{it =~ /^chrome.*/}.each { chromeTask ->
-    "${chromeTask}Test" {
-        dependsOn unzipChromeDriver
-
-        def chromedriverFilename = Os.isFamily(Os.FAMILY_WINDOWS) ? "chromedriver.exe" : "chromedriver"
-        systemProperty "webdriver.chrome.driver", new File(unzipChromeDriver.outputs.files.singleFile, chromedriverFilename).absolutePath
-    }
-}
-
 test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
+}
+
+idea {
+    project {
+        ipr {
+            withXml { provider ->
+                def node = provider.asNode()
+                node.component.find { it.'@name' == 'VcsDirectoryMappings' }?.mapping[0].'@vcs' = 'Git'
+            }
+        }
+    }
 }
