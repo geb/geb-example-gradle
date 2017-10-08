@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: gebish/ci:v5
+    environment:
+        GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
+        GRADLE_USER_HOME: .gradle-home
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gradle-home
+      - run:
+          command: |
+            Xvfb :99 -screen 1 1280x1024x16 -nolisten tcp -fbdir /var/run > /dev/null 2>&1 &
+            export DISPLAY=:99
+            export FIREFOX_VERSION=53.0.3
+            ./gradlew --no-daemon check
+      - store_artifacts:
+          path: build/reports
+      - save_cache:
+          key: gradle-home
+          paths:
+            - .gradle-home

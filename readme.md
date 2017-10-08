@@ -1,6 +1,6 @@
 # Example Geb and Gradle Project
 
-[![Build Status][build_status]](https://gitlab.com/gebish/geb-example-gradle/pipelines)
+[![Build Status][build_status]](https://circleci.com/gh/geb/geb-example-gradle/tree/master)
 
 ## Description
 
@@ -26,6 +26,6 @@ Replace `./gradlew` with `gradlew.bat` in the above examples if you're on Window
 Please ask questions on [Geb user mailing list][mailing_list] and raise issues in [Geb issue tracker][issue_tracker].
 
 
-[build_status]: https://gitlab.com/gebish/geb-example-gradle/badges/master/build.svg "Build Status"
+[build_status]: https://circleci.com/gh/geb/geb-example-gradle/tree/master.svg?style=shield&circle-token=38eb8de9af8f889922b91624a7943c474c0c3617 "Build Status"
 [mailing_list]: https://groups.google.com/forum/#!forum/geb-user
 [issue_tracker]: https://github.com/geb/issues/issues
