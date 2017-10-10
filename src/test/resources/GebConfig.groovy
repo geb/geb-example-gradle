@@ -43,4 +43,4 @@ environments {
 
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = "http://gebish.org"
+baseUrl = "localhost"
