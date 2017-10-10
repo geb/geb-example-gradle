@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 
 waiting {
-	timeout = 2
+	timeout = 5
 }
 
 environments {
@@ -43,4 +43,4 @@ environments {
 
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = "localhost"
+baseUrl = "http://localhost"
