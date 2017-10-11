@@ -4,14 +4,16 @@
 	See: http://www.gebish.org/manual/current/#configuration
 */
 
-
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 
 waiting {
 	timeout = 5
+	includeCauseInMessage = true
 }
+
+atCheckWaiting = true
 
 environments {
 	
@@ -34,13 +36,10 @@ environments {
 	// run via “./gradlew firefoxTest”
 	// See: http://code.google.com/p/selenium/wiki/FirefoxDriver
 	firefox {
-		atCheckWaiting = 1
-
 		driver = { new FirefoxDriver() }
 	}
 
 }
-
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = "http://localhost"
+baseUrl = System.getProperty('geb.build.baseUrl') ?: 'http://localhost'

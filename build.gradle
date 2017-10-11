@@ -11,11 +11,13 @@ ext {
 
     ext {
         groovyVersion = '2.4.12'
-        gebVersion = '1.1.1'
-        seleniumVersion = '3.5.3'
-        chromeDriverVersion = '2.32'
-        geckoDriverVersion = '0.18.0'
+        gebVersion = '2.0-rc-1'
+        seleniumVersion = '3.6.0'
+        chromeDriverVersion = '2.33'
+        geckoDriverVersion = '0.19.0'
     }
+
+    baseUrl = project.hasProperty('baseUrl') ? project.getProperty('baseUrl'): ''
 }
 
 repositories {
@@ -49,6 +51,7 @@ drivers.each { driver ->
 
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
+        systemProperty "geb.build.baseUrl", baseUrl
     }
 }
 
@@ -68,3 +71,4 @@ tasks.withType(Test) {
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.memoryMaximumSize = '256m'
 }
+
