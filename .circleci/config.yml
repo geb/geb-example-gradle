@@ -19,7 +19,7 @@ jobs:
             export FIREFOX_VERSION=56.0.1
             ./gradlew --no-daemon chromeHeadlessTest
       - store_artifacts:
-          path: build/reports
+          path: build/spock-reports
       - save_cache:
           key: gradle-home
           paths:
