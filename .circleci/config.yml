@@ -1,5 +1,7 @@
 version: 2
 jobs:
+  build:
+
   test:
     docker:
       - image: gebish/ci:v6
