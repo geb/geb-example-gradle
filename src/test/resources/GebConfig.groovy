@@ -52,4 +52,4 @@ environments {
 }
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = System.getProperty('geb.build.baseUrl') ?: 'http://localhost'
+baseUrl = System.getProperty('geb.build.baseUrl') ?: 'http://localhost/'

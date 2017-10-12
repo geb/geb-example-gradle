@@ -4,6 +4,10 @@ class HomePage extends Page {
 
     static url = ""
 
-    static at = { title.contentEquals("Welcome to Vökuró") }
+    static at = { title == "Welcome to Vökuró" }
+
+    static content = {
+        visibleTitle { $("h1")}
+    }
 
 }
