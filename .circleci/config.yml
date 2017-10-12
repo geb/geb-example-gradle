@@ -1,11 +1,12 @@
 version: 2
 jobs:
   build:
-
+    docker:
+      - image: gopejavi/vokuro-web-example
   test:
     docker:
       - image: gebish/ci:v6
-      - image: gopejavi/vokuro-web-example
+      #- image: gopejavi/vokuro-web-example
     environment:
         GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
         GRADLE_USER_HOME: .gradle-home
