@@ -2,11 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: gopejavi/vokuro-web-example
-  test:
-    docker:
       - image: gebish/ci:v6
-      #- image: gopejavi/vokuro-web-example
+      - image: gopejavi/vokuro-web-example
     environment:
         GRADLE_OPTS: -Xmx1024m -XX:MaxMetaspaceSize=256m
         GRADLE_USER_HOME: .gradle-home
@@ -21,7 +18,7 @@ jobs:
             export DISPLAY=:99
             export FIREFOX_VERSION=56.0.1
             ./gradlew --no-daemon chromeHeadlessTest
-      - store_test_results:
+      - store_artifacts:
           path: build/spock-reports
       - save_cache:
           key: gradle-home
