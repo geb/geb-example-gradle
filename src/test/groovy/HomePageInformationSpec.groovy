@@ -35,13 +35,13 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert pageSection1.title.text() == expectedSectionTitle
+        assert awesomeSection.title.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
-        assert pageSection1.text().contains(expectedSectionContent)
+        assert awesomeSection.text().contains(expectedSectionContent)
 
         and: "This content has gray background"
-        assert pageSection1.children()*.hasClass("well")
+        assert awesomeSection.children()*.hasClass("well")
 
         where:
         expectedSectionTitle    |   expectedSectionContent
@@ -57,22 +57,44 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert pageSection2.title.text() == expectedSectionTitle
+        assert importantStuff.title.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
-        assert pageSection2.text().contains(expectedSectionContent)
+        assert importantStuff.text().contains(expectedSectionContent)
 
         where:
         expectedSectionTitle    |   expectedSectionContent
         "Important Stuff"       |   "Cum sociis natoque penatibus"
     }
-}
-/*
 
-AA4:
-Given I am at Home page
-When always
-Then I see section with title "Example Adresses"
-And a subsection called "Vokuri, Inc." with address and Phone
-And a subsection called "Full Name" with a contact email
-*/
+    def "Correct informative section three called Example Addresses"() {
+
+        given: "I am at Home page"
+        to HomePage
+
+        when: "Always"
+        true
+
+        then: "I see section with title #expectedAddressesSectionTitle"
+        assert exampleAddresses.title.text() == expectedAddressesSectionTitle
+
+        and: "I see the correct first subsection title with #expectedOfficeAddressTitle"
+        assert officeAddressTitle.text() == expectedOfficeAddressTitle
+
+        and: "I see the correct first subsection title #expectedOfficeAddress"
+        assert officeAddress.text().contains(expectedOfficeAddress)
+
+        and: "I see the correct second subsection title #expectedInternetAddressTitle"
+        assert internetAddressTitle.text() == expectedInternetAddressTitle
+
+        and: "I see the correct second subsection content with email #expectedInternetAddress"
+        assert internetAddress.text().contains(expectedInternetAddress)
+
+        where:
+        expectedAddressesSectionTitle = "Example Addresses"
+        expectedOfficeAddressTitle = "Vokuri, Inc."
+        expectedOfficeAddress = "456 Infinite Loop, Suite 101"
+        expectedInternetAddressTitle = "Full Name"
+        expectedInternetAddress = "vokuro@phalconphp.com"
+    }
+}

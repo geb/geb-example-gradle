@@ -12,7 +12,12 @@ class HomePage extends Page {
         pageSubtitle { $("#subtitle")}
 
         pageSection { indexValue -> module new PageSectionModule(index: indexValue) }
-        pageSection1 { pageSection("1") }
-        pageSection2 { pageSection("2") }
+        awesomeSection { pageSection("1") }
+        importantStuff { pageSection("2") }
+        exampleAddresses { pageSection("3") }
+        officeAddress { exampleAddresses.$("address")[0]}
+        officeAddressTitle { officeAddress.$("strong")}
+        internetAddress { exampleAddresses.$("address")[1]}
+        internetAddressTitle { internetAddress.$("strong")}
     }
 }
