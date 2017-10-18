@@ -1,4 +1,5 @@
 import geb.Page
+import modules.PageSectionModule
 
 class HomePage extends Page {
 
@@ -7,7 +8,9 @@ class HomePage extends Page {
     static at = { title == "Welcome to Vökuró" }
 
     static content = {
-        visibleTitle { $("h1")}
-    }
+        pageVisibleTitle { $("h1")}
+        pageSubtitle { $("#subtitle")}
 
+        pageSection1 { module new PageSectionModule(index: "1") }
+    }
 }

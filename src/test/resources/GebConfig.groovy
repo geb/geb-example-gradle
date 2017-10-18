@@ -52,4 +52,5 @@ environments {
 }
 // To run the tests with all browsers just run “./gradlew test”
 
+//By default web page to test is at localhost. If not, can be specify as "./gradlew -P baseUrl=http://192.168.99.100 chromeTest"
 baseUrl = System.getProperty('geb.build.baseUrl') ?: 'http://localhost/'
