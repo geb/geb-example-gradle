@@ -26,7 +26,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         expectedSubtitleText = "This is a website secured by Phalcon Framework"
     }
 
-    def "Correct informative section one"() {
+    def "Correct informative section one called Awesome Section"() {
 
         given: "I am at Home page"
         to HomePage
@@ -47,20 +47,27 @@ class HomePageInformationSpec extends GebReportingSpec {
         expectedSectionTitle    |   expectedSectionContent
         "Awesome Section"       |   "Cum sociis natoque penatibus"
     }
+
+    def "Correct informative section two called Important Stuff"() {
+
+        given: "I am at Home page"
+        to HomePage
+
+        when: "Always"
+        true
+
+        then: "I see section with title #expectedSectionTitle"
+        assert pageSection2.title.text() == expectedSectionTitle
+
+        and: "I see some Lorem Ipsum content"
+        assert pageSection2.text().contains(expectedSectionContent)
+
+        where:
+        expectedSectionTitle    |   expectedSectionContent
+        "Important Stuff"       |   "Cum sociis natoque penatibus"
+    }
 }
 /*
-AA2:
-Given I am at Home page
-When always
-Then I see section with title "Awesome Section"
-And some lorem ipsum text
-And with gray background
-
-AA3:
-Given I am at Home page
-When always
-Then I see section with title "Important Stuff"
-And some lorem ipsum text
 
 AA4:
 Given I am at Home page

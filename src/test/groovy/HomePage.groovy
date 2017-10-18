@@ -11,6 +11,8 @@ class HomePage extends Page {
         pageVisibleTitle { $("h1")}
         pageSubtitle { $("#subtitle")}
 
-        pageSection1 { module new PageSectionModule(index: "1") }
+        pageSection { indexValue -> module new PageSectionModule(index: indexValue) }
+        pageSection1 { pageSection("1") }
+        pageSection2 { pageSection("2") }
     }
 }
