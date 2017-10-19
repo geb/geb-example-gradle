@@ -5,14 +5,14 @@ import spock.lang.Title
 
 @Title("US1: Basic Home Page")
 @Narrative("""
-As Internet surfer
+As an Internet surfer
 I want a Home page
-so that I can start using this web
+So that I can start using this web
 """)
 @Issue("https://trello.com/c/x9lV0DqC")
 class BasicHomePageSpec extends GebReportingSpec {
 
-    def "Can get to the home page"() {
+    def "Can get to the Home page"() {
         given: "Always"
         true
 
