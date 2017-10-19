@@ -44,8 +44,8 @@ class HomePageInformationSpec extends GebReportingSpec {
         assert awesomeSection.children()*.hasClass("well")
 
         where:
-        expectedSectionTitle    |   expectedSectionContent
-        "Awesome Section"       |   "Cum sociis natoque penatibus"
+        expectedSectionTitle | expectedSectionContent
+        "Awesome Section"    | "Cum sociis natoque penatibus"
     }
 
     def "Correct informative section two called Important Stuff"() {
@@ -63,8 +63,8 @@ class HomePageInformationSpec extends GebReportingSpec {
         assert importantStuff.text().contains(expectedSectionContent)
 
         where:
-        expectedSectionTitle    |   expectedSectionContent
-        "Important Stuff"       |   "Cum sociis natoque penatibus"
+        expectedSectionTitle | expectedSectionContent
+        "Important Stuff"    | "Cum sociis natoque penatibus"
     }
 
     def "Correct informative section three called Example Addresses"() {
