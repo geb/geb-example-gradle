@@ -1,4 +1,4 @@
-package modules
+package Modules
 
 import geb.Module
 

@@ -1,3 +1,4 @@
+import Pages.HomePage
 import geb.spock.GebReportingSpec
 import spock.lang.Issue
 import spock.lang.Narrative

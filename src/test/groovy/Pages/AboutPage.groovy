@@ -1,3 +1,5 @@
+package Pages
+
 import geb.Page
 
 class AboutPage extends Page {
@@ -14,6 +16,6 @@ class AboutPage extends Page {
         aboutLink { publicHeader.$("a", href: "/about") }
 
         pageVisibleTitle { $("h2") }
-        pageText { $("#subtitle") }
+        mainText { $("#main-text") }
     }
 }

@@ -1,3 +1,5 @@
+import Pages.AboutPage
+import Pages.HomePage
 import geb.spock.GebReportingSpec
 import spock.lang.Issue
 import spock.lang.Narrative
@@ -21,5 +23,19 @@ class AboutPageSpec extends GebReportingSpec {
 
         then: "I am at About page"
         at AboutPage
+    }
+
+    def "About page has particular information"() {
+        given: "I am at About page"
+        to AboutPage
+
+        when: "Always"
+        true
+
+        then: "I see a particular title and information"
+        assert pageVisibleTitle.text() == "About this Demo"
+        assert mainText.text().contains("sample application")
+        assert mainText.text().contains("Feel free to clone the code")
+        assert mainText.text().contains("Thanks!")
     }
 }

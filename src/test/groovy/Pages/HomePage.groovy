@@ -1,5 +1,7 @@
+package Pages
+
+import Modules.PageSectionModule
 import geb.Page
-import modules.PageSectionModule
 
 class HomePage extends Page {
 
