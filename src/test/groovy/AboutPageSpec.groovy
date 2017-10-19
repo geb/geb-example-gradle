@@ -15,11 +15,11 @@ So that I know more about this web
 class AboutPageSpec extends GebReportingSpec {
 
     def "Can browse to the About page"() {
-        given: "I am at Home page"
-        to HomePage
+        given: "I am at About page"
+        to AboutPage
 
-        when: "I click on About link at header"
-        aboutLink.click()
+        when: "I do nothing"
+        true
 
         then: "I am at About page"
         at AboutPage
@@ -29,7 +29,7 @@ class AboutPageSpec extends GebReportingSpec {
         given: "I am at About page"
         to AboutPage
 
-        when: "Always"
+        when: "I do nothing"
         true
 
         then: "I see a particular title and information"
