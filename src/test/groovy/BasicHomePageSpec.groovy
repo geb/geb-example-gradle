@@ -14,15 +14,14 @@ So that I can start using this web
 class BasicHomePageSpec extends GebReportingSpec {
 
     def "Can get to the Home page"() {
-        given: "Always"
-        true
-
-        when: "Web surfer goes to our web"
+        given: "I go to Home page"
         to HomePage
 
-        then: "a Home Page is displayed with title #expectedVisibleTitle"
+        when: "I do nothing"
+        true
+
+        then: "a Home Page is displayed"
         at HomePage
-        assert pageVisibleTitle.text() == expectedVisibleTitle
 
         where:
         expectedVisibleTitle = "Welcome!"

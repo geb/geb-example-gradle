@@ -17,7 +17,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         given: "I am at Home page"
         to HomePage
 
-        when: "Always"
+        when: "I do nothing"
         true
 
         then: "I see an informative subtitle with text #expectedSubtitleText"
@@ -32,7 +32,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         given: "I am at Home page"
         to HomePage
 
-        when: "Always"
+        when: "I do nothing"
         true
 
         then: "I see section with title #expectedSectionTitle"
@@ -54,7 +54,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         given: "I am at Home page"
         to HomePage
 
-        when: "Always"
+        when: "I do nothing"
         true
 
         then: "I see section with title #expectedSectionTitle"
@@ -73,7 +73,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         given: "I am at Home page"
         to HomePage
 
-        when: "Always"
+        when: "I do nothing"
         true
 
         then: "I see section with title #expectedAddressesSectionTitle"
