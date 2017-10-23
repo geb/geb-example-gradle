@@ -17,5 +17,7 @@ class AboutPage extends Page {
         aboutLink { publicHeader.$("a", href: "/about") }
 
         mainContent { module TitleWithTextModule }
+        visibleTitle { mainContent.pageVisibleTitle }
+        mainText { mainContent.mainText }
     }
 }

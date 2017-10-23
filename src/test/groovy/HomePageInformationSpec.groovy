@@ -36,7 +36,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert awesomeSection.title.text() == expectedSectionTitle
+        assert awesomeSectionTitle.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
         assert awesomeSection.text().contains(expectedSectionContent)
@@ -58,7 +58,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert importantStuff.title.text() == expectedSectionTitle
+        assert importantStuffTitle.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
         assert importantStuff.text().contains(expectedSectionContent)
@@ -77,7 +77,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedAddressesSectionTitle"
-        assert exampleAddresses.title.text() == expectedAddressesSectionTitle
+        assert exampleAddressesTitle.text() == expectedAddressesSectionTitle
 
         and: "I see the correct first subsection title with #expectedOfficeAddressTitle"
         assert officeAddressTitle.text() == expectedOfficeAddressTitle
