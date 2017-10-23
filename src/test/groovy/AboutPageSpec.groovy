@@ -33,6 +33,7 @@ class AboutPageSpec extends GebReportingSpec {
         true
 
         then: "I see a particular title and information"
+        at AboutPage
         assert pageVisibleTitle.text() == "About this Demo"
         assert mainText.text().contains("sample application")
         assert mainText.text().contains("Feel free to clone the code")
