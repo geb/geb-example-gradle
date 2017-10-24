@@ -20,10 +20,7 @@ class BasicHomePageSpec extends GebReportingSpec {
         when: "I do nothing"
         true
 
-        then: "a Home Page is displayed"
+        then: "We are at the Home page"
         at HomePage
-
-        where:
-        expectedVisibleTitle = "Welcome!"
     }
 }

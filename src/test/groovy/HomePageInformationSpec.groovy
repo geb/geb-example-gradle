@@ -21,7 +21,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see an informative subtitle with text #expectedSubtitleText"
-        assert pageSubtitle.text() == expectedSubtitleText
+        assert mainSubtitle.text() == expectedSubtitleText
 
         where:
         expectedSubtitleText = "This is a website secured by Phalcon Framework"
@@ -36,7 +36,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert awesomeSectionTitle.text() == expectedSectionTitle
+        assert awesomeSection.title.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
         assert awesomeSection.text().contains(expectedSectionContent)
@@ -58,7 +58,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedSectionTitle"
-        assert importantStuffTitle.text() == expectedSectionTitle
+        assert importantStuff.title.text() == expectedSectionTitle
 
         and: "I see some Lorem Ipsum content"
         assert importantStuff.text().contains(expectedSectionContent)
@@ -77,7 +77,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see section with title #expectedAddressesSectionTitle"
-        assert exampleAddressesTitle.text() == expectedAddressesSectionTitle
+        assert exampleAddresses.title.text() == expectedAddressesSectionTitle
 
         and: "I see the correct first subsection title with #expectedOfficeAddressTitle"
         assert officeAddressTitle.text() == expectedOfficeAddressTitle

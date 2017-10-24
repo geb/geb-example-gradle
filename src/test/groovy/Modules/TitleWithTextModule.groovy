@@ -5,7 +5,7 @@ import geb.Module
 class TitleWithTextModule extends Module {
 
     static content = {
-        pageVisibleTitle { $("h2") }
+        title { $("h2") }
         mainText { $("#main-text") }
     }
 }

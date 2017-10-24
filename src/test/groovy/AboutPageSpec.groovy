@@ -34,8 +34,8 @@ class AboutPageSpec extends GebReportingSpec {
 
         then: "I see a particular title and information"
         at AboutPage
-        assert visibleTitle.text() == "About this Demo"
-        assert mainText.text().contains(
+        assert mainPanel.title.text() == "About this Demo"
+        assert mainPanel.mainText.text().contains(
                 "This is a sample application for the Phalcon Framework. We expect to implement as many features as possible to show how the framework works and its potential. Please write us if you have any feedback or comments. Feel free to clone the code of this application here. The purpose of this application is merely academic. Thanks!."
         )
     }

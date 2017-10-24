@@ -8,6 +8,6 @@ class PageSectionModule extends Module {
 
     static content = {
         section { $("#section-$index") }
-        visibleTitle { section.$("h3") }
+        title { section.$("h3") }
     }
 }

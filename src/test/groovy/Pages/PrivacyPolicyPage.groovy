@@ -1,5 +1,6 @@
 package Pages
 
+import Modules.HeaderModule
 import Modules.TitleWithTextModule
 import geb.Page
 
@@ -9,16 +10,12 @@ class PrivacyPolicyPage extends Page {
 
     static at = {
         title == "Welcome to Vökuró"
-        mainContent.pageVisibleTitle.text() == "Privacy"
+        mainPanel.title.text() == "Privacy"
     }
 
     static content = {
-        publicHeader { $("#header") }
-        aboutLink { publicHeader.$("a", href: "/about") }
-
-        mainContent { module TitleWithTextModule }
-        visibleTitle { mainContent.pageVisibleTitle }
-        mainText { mainContent.mainText }
+        header { module HeaderModule }
+        mainPanel { module TitleWithTextModule }
     }
 
 }
