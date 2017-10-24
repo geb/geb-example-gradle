@@ -4,13 +4,13 @@ import Modules.HeaderModule
 import Modules.TitleWithTextModule
 import geb.Page
 
-class PrivacyPolicyPage extends Page {
+class TermsPage extends Page {
 
-    static url = "/privacy"
+    static url = "/terms"
 
     static at = {
         title == "Welcome to Vökuró"
-        mainPanel.title.text() == "Privacy"
+        mainPanel.title.text() == "Terms"
     }
 
     static content = {
