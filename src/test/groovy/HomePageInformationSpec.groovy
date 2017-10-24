@@ -21,7 +21,7 @@ class HomePageInformationSpec extends GebReportingSpec {
         true
 
         then: "I see an informative subtitle with text #expectedSubtitleText"
-        assert pageSubtitle.text() == expectedSubtitleText
+        assert mainSubtitle.text() == expectedSubtitleText
 
         where:
         expectedSubtitleText = "This is a website secured by Phalcon Framework"

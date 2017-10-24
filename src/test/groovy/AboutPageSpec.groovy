@@ -1,5 +1,4 @@
 import Pages.AboutPage
-import Pages.HomePage
 import geb.spock.GebReportingSpec
 import spock.lang.Issue
 import spock.lang.Narrative
@@ -33,9 +32,10 @@ class AboutPageSpec extends GebReportingSpec {
         true
 
         then: "I see a particular title and information"
-        assert pageVisibleTitle.text() == "About this Demo"
-        assert mainText.text().contains("sample application")
-        assert mainText.text().contains("Feel free to clone the code")
-        assert mainText.text().contains("Thanks!")
+        at AboutPage
+        assert mainPanel.title.text() == "About this Demo"
+        assert mainPanel.mainText.text().contains(
+                "This is a sample application for the Phalcon Framework. We expect to implement as many features as possible to show how the framework works and its potential. Please write us if you have any feedback or comments. Feel free to clone the code of this application here. The purpose of this application is merely academic. Thanks!."
+        )
     }
 }
