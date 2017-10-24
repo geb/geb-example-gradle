@@ -4,21 +4,27 @@
 	See: http://www.gebish.org/manual/current/#configuration
 */
 
-
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
 
 waiting {
-	timeout = 2
+	timeout = 5
+	includeCauseInMessage = true
 }
+
+atCheckWaiting = true
 
 environments {
 	
 	// run via “./gradlew chromeTest”
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chrome {
-		driver = { new ChromeDriver() }
+		driver = {
+			def driverInstance = new ChromeDriver()
+			driverInstance.manage().window().maximize()
+			driverInstance
+		}
 	}
 
 	// run via “./gradlew chromeHeadlessTest”
@@ -27,20 +33,24 @@ environments {
 		driver = {
 			ChromeOptions o = new ChromeOptions()
 			o.addArguments('headless')
-			new ChromeDriver(o)
+			def driverInstance = new ChromeDriver(o)
+			driverInstance.manage().window().maximize()
+			driverInstance
 		}
 	}
 	
 	// run via “./gradlew firefoxTest”
 	// See: http://code.google.com/p/selenium/wiki/FirefoxDriver
 	firefox {
-		atCheckWaiting = 1
-
-		driver = { new FirefoxDriver() }
+		driver = {
+			def driverInstance = new FirefoxDriver()
+			driverInstance.manage().window().maximize()
+			driverInstance
+		}
 	}
 
 }
-
 // To run the tests with all browsers just run “./gradlew test”
 
-baseUrl = "http://gebish.org"
+//By default web page to test is at localhost. If not, can be specify as "./gradlew -P baseUrl=http://192.168.99.100 chromeTest"
+baseUrl = System.getProperty('geb.build.baseUrl') ?: 'http://localhost/'

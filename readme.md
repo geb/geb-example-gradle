@@ -1,6 +1,6 @@
 # Example Geb and Gradle Project
 
-[![Build Status][build_status]](https://circleci.com/gh/geb/geb-example-gradle/tree/master)
+[![CircleCI](https://circleci.com/gh/gopejavi/geb-spock-e2e.svg?style=svg)](https://circleci.com/gh/gopejavi/geb-spock-e2e)
 
 ## Description
 
@@ -21,11 +21,6 @@ To run with all, you can run:
 
 Replace `./gradlew` with `gradlew.bat` in the above examples if you're on Windows.
 
-## Questions and issues
+## Thanks
 
-Please ask questions on [Geb user mailing list][mailing_list] and raise issues in [Geb issue tracker][issue_tracker].
-
-
-[build_status]: https://circleci.com/gh/geb/geb-example-gradle/tree/master.svg?style=shield&circle-token=38eb8de9af8f889922b91624a7943c474c0c3617 "Build Status"
-[mailing_list]: https://groups.google.com/forum/#!forum/geb-user
-[issue_tracker]: https://github.com/geb/issues/issues
+Thanks to Geb and the original base repo! https://github.com/geb/geb-example-gradle
