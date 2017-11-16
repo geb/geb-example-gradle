@@ -45,6 +45,8 @@ webdriverBinaries {
 
 drivers.each { driver ->
     task "${driver}Test"(type: Test) {
+        group JavaBasePlugin.VERIFICATION_GROUP
+
         outputs.upToDateWhen { false }  // Always run tests
 
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
