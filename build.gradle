@@ -10,7 +10,6 @@ ext {
     drivers = ["firefox", "chrome", "chromeHeadless"]
 
     ext {
-        groovyVersion = '2.4.16'
         gebVersion = '+'
         seleniumVersion = '3.14.0'
         chromeDriverVersion = '73.0.3683.68'
@@ -35,7 +34,6 @@ dependencies {
     testCompile("org.spockframework:spock-core:1.1-groovy-2.4") {
         exclude group: "org.codehaus.groovy"
     }
-    testCompile "org.codehaus.groovy:groovy-all:$groovyVersion"
 
     // If using JUnit, need to depend on geb-junit (3 or 4)
     testCompile "org.gebish:geb-junit4:$gebVersion"
