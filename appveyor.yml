@@ -1,0 +1,5 @@
+version: "{build}"
+build_script: ./gradlew --no-daemon check
+install:
+  - choco install firefox --version 66.0.3
+  - choco install googlechrome --version 79.0.3945.88 --ignore-checksums
