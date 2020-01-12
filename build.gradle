@@ -44,7 +44,10 @@ dependencies {
 }
 
 webdriverBinaries {
-    chromedriver chromeDriverVersion
+    chromedriver {
+        version = chromeDriverVersion
+        fallbackTo32Bit = true
+    }
     geckodriver geckoDriverVersion
 }
 
