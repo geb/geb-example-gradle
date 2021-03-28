@@ -6,3 +6,4 @@ build
 *.iml
 *.iws
 out
+.idea
