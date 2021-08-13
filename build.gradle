@@ -34,6 +34,7 @@ dependencies {
 
     // If using JUnit, need to depend on geb-junit
     testCompile "org.gebish:geb-junit4:$gebVersion"
+    testCompile "junit:junit:4.13.2"
 
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
