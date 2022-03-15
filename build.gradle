@@ -7,12 +7,12 @@ plugins {
 
 ext {
     // The drivers we want to use
-    drivers = ["firefox", "chrome", "chromeHeadless"]
+    drivers = ["chrome", "chromeHeadless"]
 
     ext {
         gebVersion = '5.1'
         seleniumVersion = '3.14.0'
-        chromeDriverVersion = '79.0.3945.36'
+        chromeDriverVersion = '99.0.4844.51'
         geckoDriverVersion = '0.26.0'
     }
 }
@@ -31,7 +31,6 @@ dependencies {
 
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
-    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
 }
 
 webdriverBinaries {

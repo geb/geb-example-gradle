@@ -1,3 +1,5 @@
+package pages
+
 import geb.Page
 
 class GebishOrgHomePage extends Page {
