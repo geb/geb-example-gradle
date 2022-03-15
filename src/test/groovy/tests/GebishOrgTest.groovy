@@ -1,7 +1,11 @@
+package tests
+
 import geb.junit4.GebReportingTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import pages.GebishOrgHomePage
+import pages.TheBookOfGebPage
 
 @RunWith(JUnit4)
 class GebishOrgTest extends GebReportingTest {
