@@ -7,7 +7,7 @@ plugins {
 
 ext {
     // The drivers we want to use
-    drivers = ["firefox", "chrome", "chromeHeadless"]
+    drivers = ["chrome", "chromeHeadless"]
 
     ext {
         gebVersion = '5.1'
@@ -31,7 +31,6 @@ dependencies {
 
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
-    testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
 }
 
 webdriverBinaries {
