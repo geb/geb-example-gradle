@@ -1,4 +1,4 @@
-package pages
+package modules
 
 import geb.Module
 
@@ -11,7 +11,7 @@ class ManualsMenuModule extends Module {
 
     void open() {
         toggle.click()
-        waitFor { !linksContainer.hasClass("animating") }
+        waitFor { linksContainer.hasClass("animating") }
     }
 
 

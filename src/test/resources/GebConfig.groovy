@@ -1,6 +1,6 @@
 /*
 	This is the Geb configuration file.
-	
+
 	See: http://www.gebish.org/manual/current/#configuration
 */
 
@@ -20,11 +20,11 @@ environments {
     chromeHeadless {
         driver = {
             ChromeOptions o = new ChromeOptions()
-            o.setBinary(new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
+//            o.setBinary(new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
             o.addArguments('headless')
             new ChromeDriver(o)
         }
     }
 }
 
-baseUrl = "http://gebish.org"
+baseUrl = "https://test.bocbs.cardpay-test.com/"
