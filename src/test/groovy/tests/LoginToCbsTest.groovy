@@ -6,14 +6,41 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import pages.CbsLoginPage
+import pages.MainPageCbs
 
 @RunWith(JUnit4)
 class LoginToCbsTest extends GebReportingTest {
     @Test
-    void loginToCbs() {
-        CbsLoginPage.fillCredentialsForm()
+    void loginIsSuccessful() {
+        // When
+        CbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Qwerty")
         CbsLoginPage.clickLoginButton()
+
+        // Then
+        MainPageCbs.verifyPageIsDisplayed()
     }
 
+    @Test
+    void loginFailsWhenPasswordIsWrong() {
+        // When
+        CbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Wrong_password")
+        CbsLoginPage.clickLoginButton()
 
+        // Then
+        verifyLoginErrorIsDisplayed()
+    }
+
+    @Test
+    void loginFailsWhenUsernameIsWrong() {
+        // When
+        CbsLoginPage.fillCredentialsForm("Wrong_username", "123_Qwerty")
+        CbsLoginPage.clickLoginButton()
+
+        // Then
+        verifyLoginErrorIsDisplayed()
+    }
+
+    private void verifyLoginErrorIsDisplayed() {
+
+    }
 }

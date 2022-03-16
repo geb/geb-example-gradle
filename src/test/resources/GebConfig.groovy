@@ -20,7 +20,7 @@ environments {
     chromeHeadless {
         driver = {
             ChromeOptions o = new ChromeOptions()
-//            o.setBinary(new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
+            o.setBinary(new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"))
             o.addArguments('headless')
             new ChromeDriver(o)
         }

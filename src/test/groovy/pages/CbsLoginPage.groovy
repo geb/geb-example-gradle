@@ -17,11 +17,11 @@ class CbsLoginPage extends Page {
         }
     }
 
-    static fillCredentialsForm() {
+    static fillCredentialsForm(String username, String password) {
         Browser.drive {
             to CbsLoginPage
-            loginForm.loginField.value("cbs-tester-1")
-            loginForm.passwordField.value("123_Qwerty")
+            loginForm.loginField.value(username)
+            loginForm.passwordField.value(password)
         }
     }
 
@@ -29,10 +29,12 @@ class CbsLoginPage extends Page {
         Browser.drive {
             at CbsLoginPage
             loginForm.loginButton.click()
-            waitFor(60) { MainPageCBS.topTolbar.mainMenu }
         }
     }
 
-
-
+    static authorizeInCbs(String username, String password) {
+        fillCredentialsForm(username, password)
+        clickLoginButton()
+    }
 }
+
