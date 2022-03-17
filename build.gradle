@@ -13,7 +13,6 @@ ext {
         gebVersion = '5.1'
         seleniumVersion = '3.14.0'
         chromeDriverVersion = '99.0.4844.51'
-        geckoDriverVersion = '0.26.0'
     }
 }
 
@@ -22,24 +21,18 @@ repositories {
 }
 
 dependencies {
-    // If using Spock, need to depend on geb-spock
-    testCompile "org.gebish:geb-spock:$gebVersion"
-
-    // If using JUnit, need to depend on geb-junit
-    testCompile "org.gebish:geb-junit4:$gebVersion"
-    testCompile "junit:junit:4.13.2"
+    testCompile 'io.github.bonigarcia:selenium-jupiter:4.0.1'
+    testCompile 'org.seleniumhq.selenium:selenium-java:4.1.2'
+    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testCompile 'org.gebish:geb-junit5:5.1'
     testCompile 'org.assertj:assertj-core:3.22.0'
-
-    // Drivers
-    testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
 }
 
 webdriverBinaries {
     chromedriver {
-        version = chromeDriverVersion
+        version = '99.0.4844.51'
         fallbackTo32Bit = true
     }
-    geckodriver geckoDriverVersion
 }
 
 drivers.each { driver ->
@@ -56,6 +49,14 @@ drivers.each { driver ->
 test {
     dependsOn drivers.collect { tasks["${it}Test"] }
     enabled = false
+
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+//    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+//    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
+//    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", 2)
 }
 
 tasks.withType(Test) {
