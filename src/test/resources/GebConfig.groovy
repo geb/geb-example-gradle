@@ -26,5 +26,5 @@ environments {
         }
     }
 }
-
+reportsDir = new File("target/runtime_reports_dir")
 baseUrl = "https://test.bocbs.cardpay-test.com/"

@@ -8,12 +8,6 @@ plugins {
 ext {
     // The drivers we want to use
     drivers = ["chrome", "chromeHeadless"]
-
-    ext {
-        gebVersion = '5.1'
-        seleniumVersion = '3.14.0'
-        chromeDriverVersion = '99.0.4844.51'
-    }
 }
 
 repositories {
@@ -21,11 +15,11 @@ repositories {
 }
 
 dependencies {
-    testCompile 'io.github.bonigarcia:selenium-jupiter:4.0.1'
-    testCompile 'org.seleniumhq.selenium:selenium-java:4.1.2'
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-    testCompile 'org.gebish:geb-junit5:5.1'
-    testCompile 'org.assertj:assertj-core:3.22.0'
+    testImplementation 'io.github.bonigarcia:selenium-jupiter:4.0.1'
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'org.gebish:geb-junit5:5.1'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
 }
 
 webdriverBinaries {
@@ -38,18 +32,13 @@ webdriverBinaries {
 drivers.each { driver ->
     task "${driver}Test"(type: Test) {
         group JavaBasePlugin.VERIFICATION_GROUP
-
         outputs.upToDateWhen { false }  // Always run tests
-
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
     }
 }
 
 test {
-    dependsOn drivers.collect { tasks["${it}Test"] }
-    enabled = false
-
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
@@ -57,6 +46,8 @@ test {
 //    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
 //    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
 //    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", 2)
+    dependsOn drivers.collect { tasks["${it}Test"] }
+//    enabled = false
 }
 
 tasks.withType(Test) {
