@@ -9,5 +9,4 @@ class CbsLoginPageModule extends Module {
         passwordField { form.$(id: "password") }
         loginButton { form.$(name: "login") }
     }
-
 }

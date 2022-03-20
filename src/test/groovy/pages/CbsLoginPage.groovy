@@ -2,7 +2,10 @@ package pages
 
 import geb.Browser
 import geb.Page
+import groovy.transform.CompileStatic
 import modules.CbsLoginPageModule
+
+import static geb.Browser.drive
 
 class CbsLoginPage extends Page {
     static at = { title == "Log in to CBS" }
@@ -11,30 +14,38 @@ class CbsLoginPage extends Page {
         loginForm { module(CbsLoginPageModule) }
     }
 
-    static void goToCBSPage() {
-        Browser.drive {
+    void goToCBSPage() {
+        drive(getBrowser(), {
             go(baseUrl)             //ToDo разобраться с переопределением baseUrl
-        }
+        })
     }
 
-    static fillCredentialsForm(String username, String password) {
-        Browser.drive {
-            to CbsLoginPage
+    void fillCredentialsForm(String username, String password) {
+        drive(getBrowser(), {
+            getBrowser().to(this)
             loginForm.loginField.value(username)
             loginForm.passwordField.value(password)
-        }
+        })
     }
 
-    static void clickLoginButton() {
-        Browser.drive {
-            at CbsLoginPage
+    void clickLoginButton() {
+        drive(getBrowser(), {
+            getBrowser().at(this)
             loginForm.loginButton.click()
-        }
+        })
     }
 
-    static authorizeInCbs(String username, String password) {
+    void authorizeInCbs(String username, String password) {
         fillCredentialsForm(username, password)
         clickLoginButton()
+    }
+
+    void getErrorMessage() {
+        drive(getBrowser(), {
+            getBrowser().at(this)
+            page
+            waitFor { $("div", innerHTML: contains("Invalid username or password.")) }
+        })
     }
 }
 

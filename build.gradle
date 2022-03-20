@@ -1,13 +1,6 @@
 plugins {
     id "idea"
     id "groovy"
-    id "com.github.erdi.webdriver-binaries" version "2.2"
-    id "com.github.erdi.idea-base" version "2.2"
-}
-
-ext {
-    // The drivers we want to use
-    drivers = ["chrome", "chromeHeadless"]
 }
 
 repositories {
@@ -22,42 +15,25 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.22.0'
 }
 
-webdriverBinaries {
-    chromedriver {
-        version = '99.0.4844.51'
-        fallbackTo32Bit = true
-    }
+task chromedriverTest(type: Test) {
+    useJUnitPlatform()
+//    systemProperty "geb.env", "chrome"
 }
 
-drivers.each { driver ->
-    task "${driver}Test"(type: Test) {
-        group JavaBasePlugin.VERIFICATION_GROUP
-        outputs.upToDateWhen { false }  // Always run tests
-        systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
-        systemProperty "geb.env", driver
-    }
+task chromeheadlessTest(type: Test) {
+    useJUnitPlatform()
+//    systemProperty "geb.env", "chromeHeadless"
 }
 
 test {
     useJUnitPlatform()
+//    systemProperty "geb.env", "chrome"
     testLogging {
         events "passed", "skipped", "failed"
     }
-//    systemProperty("junit.jupiter.execution.parallel.enabled", "true")
-//    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
-//    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", 2)
-    dependsOn drivers.collect { tasks["${it}Test"] }
-//    enabled = false
-}
 
-tasks.withType(Test) {
-    maxHeapSize = "1g"
-    jvmArgs '-XX:MaxMetaspaceSize=128m'
-    testLogging {
-        exceptionFormat = 'full'
-    }
-}
-
-tasks.withType(GroovyCompile) {
-    groovyOptions.forkOptions.memoryMaximumSize = '256m'
+    systemProperty("junit.jupiter.execution.parallel.enabled" , "true")
+    systemProperty("junit.jupiter.execution.parallel.config.strategy", "fixed")
+    systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+    systemProperty("junit.jupiter.execution.parallel.config.fixed.parallelism", 2)
 }
