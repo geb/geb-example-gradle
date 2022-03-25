@@ -8,5 +8,7 @@ class CbsLoginPageModule extends Module {
         loginField { form.$(id: "name") }
         passwordField { form.$(id: "password") }
         loginButton { form.$(name: "login") }
+
+        error { $("div", innerHTML: contains("Invalid username or password.")) }
     }
 }

@@ -4,6 +4,8 @@ import geb.Browser
 import geb.Page
 import modules.MainPageCbsModule
 
+import static geb.Browser.drive
+
 class MainPageCbs extends Page {
 
     static at = { waitFor { title == "CBS" } }
@@ -13,12 +15,12 @@ class MainPageCbs extends Page {
     }
 
     static void verifyPageIsDisplayed() {
-        Browser.drive {
-            at MainPageCbs
+        drive(getBrowser(), {
+            getBrowser().to(this)
             waitFor(60) {
                 topTolbar.mainMenu
             }
-        }
+        })
     }
 
 //    static void iAmAuthorizedInCbs() {

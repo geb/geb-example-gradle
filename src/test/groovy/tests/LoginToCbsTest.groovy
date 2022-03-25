@@ -12,12 +12,16 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.CbsLoginPage
 import pages.MainPageCbs
+
+import javax.security.auth.login.Configuration
+
 import static org.assertj.core.api.Assertions.*
 
 @ExtendWith(SeleniumJupiter.class)
 class LoginToCbsTest extends GebReportingTest {
     public Browser browser
     public CbsLoginPage page
+    public ChromeDriver driver
 //    @Test
 //    void loginIsSuccessful() {
 //        // When
@@ -32,7 +36,9 @@ class LoginToCbsTest extends GebReportingTest {
     @BeforeEach
     public void classLevelSetup() {
         browser = new Browser()
-        browser.setDriver(new ChromeDriver())
+//        driver = browser.getConfig().getRawConfig().driver.call()
+        driver = new ChromeDriver()
+        browser.setDriver(driver)
         page = browser.createPage(CbsLoginPage.class)
     }
 
@@ -62,6 +68,6 @@ class LoginToCbsTest extends GebReportingTest {
     }
 
     void verifyLoginErrorIsDisplayed() {
-        assertThat(page.getErrorMessage().isEmpty()).isFalse();
+        browser.getPage().getErrorMessage()
     }
 }

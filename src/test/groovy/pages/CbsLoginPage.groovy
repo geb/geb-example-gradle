@@ -32,6 +32,7 @@ class CbsLoginPage extends Page {
         drive(getBrowser(), {
             getBrowser().at(this)
             loginForm.loginButton.click()
+
         })
     }
 
@@ -43,8 +44,7 @@ class CbsLoginPage extends Page {
     void getErrorMessage() {
         drive(getBrowser(), {
             getBrowser().at(this)
-            page
-            waitFor { $("div", innerHTML: contains("Invalid username or password.")) }
+            loginForm.error
         })
     }
 }

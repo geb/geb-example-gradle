@@ -1,3 +1,4 @@
+
 /*
 	This is the Geb configuration file.
 
@@ -17,7 +18,7 @@ waiting {
 
 environments {
 
-    driver = { new ChromeDriver() }
+//    driver = { new ChromeDriver() }
 //    driver = { new BaseTest().classLevelSetup() }
 //    driver = new BaseTest().classLevelSetup()
 
@@ -25,7 +26,7 @@ environments {
 
 //    chrome {
 //        driver = { new ChromeDriver() }
-//    }
+    }
 //
 //    chromeHeadless {
 //        driver = {
@@ -34,6 +35,6 @@ environments {
 //            new ChromeDriver(o)
 //        }
 //    }
-}
+//}
 reportsDir = new File("target/runtime_reports_dir")
 baseUrl = "https://test.bocbs.cardpay-test.com/"
