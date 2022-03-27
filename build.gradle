@@ -15,19 +15,8 @@ dependencies {
     testImplementation 'org.assertj:assertj-core:3.22.0'
 }
 
-task chromedriverTest(type: Test) {
-    useJUnitPlatform()
-//    systemProperty "geb.env", "chrome"
-}
-
-task chromeheadlessTest(type: Test) {
-    useJUnitPlatform()
-//    systemProperty "geb.env", "chromeHeadless"
-}
-
 test {
     useJUnitPlatform()
-//    systemProperty "geb.env", "chrome"
     testLogging {
         events "passed", "skipped", "failed"
     }

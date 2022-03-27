@@ -14,26 +14,30 @@ class MainPageCbs extends Page {
         topTolbar { module(MainPageCbsModule) }
     }
 
-    static void verifyPageIsDisplayed() {
+    void verifyPageIsDisplayed() {
         drive(getBrowser(), {
             getBrowser().to(this)
-            waitFor(60) {
-                topTolbar.mainMenu
-            }
+            waitFor(60) { topTolbar.mainMenu }
         })
     }
 
-//    static void iAmAuthorizedInCbs() {
-//        at MainPageCBS
-//        if(!topTolbar.mainMenu.isEmpty()) {
-//            return
-//        } else {
-//            Browser.drive {
-//                CbsLoginPage.goToCBSPage()
-//                at CbsLoginPage
-//                CbsLoginPage.authorizeInCbs("cbs-tester-1", "123_Qwerty")
-//                mainPageCbsIsDisplays()
-//            }
-//        }
-//    }
+    void iAmLoginedToCbs(Page cbsLoginPage, Page mainPageCbs) {
+        drive(getBrowser(), {
+            getBrowser().to(this)
+
+            if (!topTolbar.mainMenu.isDisplayed()) {
+                return
+            }
+
+            go(browser.getConfig().getRawConfig().baseUrl as String)
+            //go to mainpage
+            //go to loginpage
+            //loginToCbs()
+
+            verifyPageIsDisplayed()
+
+        })
+    }
+
+
 }

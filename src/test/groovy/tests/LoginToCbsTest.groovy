@@ -1,45 +1,31 @@
 package tests
 
 import geb.Browser
-import geb.Page
 import geb.junit5.GebReportingTest
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import io.github.bonigarcia.seljup.SeleniumJupiter
-import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver;
+import static org.assertj.core.api.Assertions.*
 import pages.CbsLoginPage
 import pages.MainPageCbs
-
-import javax.security.auth.login.Configuration
-
-import static org.assertj.core.api.Assertions.*
 
 @ExtendWith(SeleniumJupiter.class)
 class LoginToCbsTest extends GebReportingTest {
     public Browser browser
-    public CbsLoginPage page
+    public CbsLoginPage cbsLoginPage
+    public MainPageCbs mainPageCbs
     public ChromeDriver driver
-//    @Test
-//    void loginIsSuccessful() {
-//        // When
-//        CbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Qwerty")
-//        CbsLoginPage.clickLoginButton()
-//
-//        // Then
-//        MainPageCbs.verifyPageIsDisplayed()
-//    }
-//
 
     @BeforeEach
     public void classLevelSetup() {
         browser = new Browser()
-//        driver = browser.getConfig().getRawConfig().driver.call()
         driver = new ChromeDriver()
         browser.setDriver(driver)
-        page = browser.createPage(CbsLoginPage.class)
+        cbsLoginPage = browser.createPage(CbsLoginPage.class)
+        mainPageCbs = browser.createPage(MainPageCbs.class)
     }
 
     @AfterEach
@@ -47,21 +33,31 @@ class LoginToCbsTest extends GebReportingTest {
         browser.quit()
     }
 
-    @Test
-    void loginFailsWhenPasswordIsWrong() {
-        // When
-        page.fillCredentialsForm("cbs-tester-1", "123_Wrong_password")
-        page.clickLoginButton()
-
-        // Then
-        verifyLoginErrorIsDisplayed()
-    }
+//    @Test
+//    void loginIsSuccessful() {
+//        // When
+//        cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Qwerty")
+//        cbsLoginPage.clickLoginButton()
+//
+//        // Then
+//        mainPageCbs.verifyPageIsDisplayed()
+//    }
+//
+//    @Test
+//    void loginFailsWhenPasswordIsWrong() {
+//        // When
+//        cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Wrong_password")
+//        cbsLoginPage.clickLoginButton()
+//
+//        // Then
+//        verifyLoginErrorIsDisplayed()
+//    }
 
     @Test
     void loginFailsWhenUsernameIsWrong() {
         // When
-        page.fillCredentialsForm("Wrong_username", "123_Qwerty")
-        page.clickLoginButton()
+        cbsLoginPage.fillCredentialsForm("Wrong_username", "123_Qwerty")
+        cbsLoginPage.clickLoginButton()
 
         // Then
         verifyLoginErrorIsDisplayed()
