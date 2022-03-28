@@ -36,6 +36,14 @@ class CbsLoginPage extends Page {
         })
     }
 
+    String getPageTitle() {
+        String actualPageTitle = null
+        drive(getBrowser(), {
+            actualPageTitle = getBrowser().getTitle()
+        })
+        return actualPageTitle
+    }
+
     void authorizeInCbs(String username, String password) {
         fillCredentialsForm(username, password)
         clickLoginButton()

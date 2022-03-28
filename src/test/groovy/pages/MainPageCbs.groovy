@@ -25,15 +25,13 @@ class MainPageCbs extends Page {
         drive(getBrowser(), {
             getBrowser().to(this)
 
-            if (!topTolbar.mainMenu.isDisplayed()) {
+            if (!$("#topToolbar").isEmpty()) {
                 return
             }
 
             go(browser.getConfig().getRawConfig().baseUrl as String)
-            //go to mainpage
-            //go to loginpage
-            //loginToCbs()
-
+            go(baseUrl)
+            CbsLoginPage.authorizeInCbs("cbs-tester-1", "123_Qwerty")
             verifyPageIsDisplayed()
 
         })
