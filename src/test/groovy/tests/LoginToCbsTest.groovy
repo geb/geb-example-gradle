@@ -49,7 +49,10 @@ class LoginToCbsTest extends GebReportingTest {
     void loginFailsWhenPasswordIsWrong() {
         // When
         cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Wrong_password")
-        cbsLoginPage.clickLoginButton()
+        def loginButton = CbsLoginPage.getLoginButton()
+        loginButton.click()
+
+//        cbsLoginPage.clickLoginButton()
 
         // Then
         assertThat(browser.getPage().getClass()).isEqualTo(MainPageCbs.class)

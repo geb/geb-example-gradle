@@ -3,11 +3,12 @@ package modules
 import geb.Module
 
 class CbsLoginPageModule extends Module {
-    static content = {
-        form { $("form") }
-        loginField { form.$(id: "name") }
-        passwordField { form.$(id: "password") }
-        loginButton { form.$(name: "login") }
+    static public content = {
+
+        loginField { form -> form.$(id: "name") }
+        passwordField { form -> form.$(id: "password") }
+//        loginButton { form.$(name: "login") }
+        loginButton { form -> form.$(name: "login") }
 
         error { $("div", innerHTML: contains("Invalid username or password.")) }
     }
