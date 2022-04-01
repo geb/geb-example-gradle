@@ -14,12 +14,6 @@ class CbsLoginPage extends Page {
         loginForm { module(CbsLoginPageModule) }
     }
 
-    void goToCBSPage() {
-        drive(getBrowser(), {
-            go(baseUrl)             //ToDo разобраться с переопределением baseUrl
-        })
-    }
-
     void fillCredentialsForm(String username, String password) {
         drive(getBrowser(), {
             getBrowser().to(this)
@@ -31,22 +25,22 @@ class CbsLoginPage extends Page {
     void clickLoginButton() {
         drive(getBrowser(), {
             getBrowser().at(this)
-            loginForm.loginButton.click()
-
+            loginForm.loginButton.click(MainPageCbs)
         })
-    }
-
-    String getPageTitle() {
-        String actualPageTitle = null
-        drive(getBrowser(), {
-            actualPageTitle = getBrowser().getTitle()
-        })
-        return actualPageTitle
     }
 
     void authorizeInCbs(String username, String password) {
         fillCredentialsForm(username, password)
         clickLoginButton()
+    }
+
+    void iAmSuccessfulAuthorizeInCbs() {
+        fillCredentialsForm("cbs-tester-1", "123_Qwerty")
+        clickLoginButton()
+        println("Text")
+//        drive(getBrowser(), {
+//            browser.createPage(MainPageCbs.class).verifyPageIsDisplayed()
+//        })
     }
 
     void getErrorMessage() {

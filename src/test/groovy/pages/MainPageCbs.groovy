@@ -8,16 +8,16 @@ import static geb.Browser.drive
 
 class MainPageCbs extends Page {
 
-    static at = { waitFor { title == "CBS" } }
+    static at = { waitFor { title == "CBS"} }
 
     static content = {
-        topTolbar { module(MainPageCbsModule) }
+        topToolbar { module(MainPageCbsModule) }
     }
 
     void verifyPageIsDisplayed() {
         drive(getBrowser(), {
             getBrowser().to(this)
-            waitFor(60) { topTolbar.mainMenu }
+            waitFor(60) { topToolbar.mainMenu }
         })
     }
 
@@ -38,4 +38,11 @@ class MainPageCbs extends Page {
     }
 
 
+    void goToInstitutionsWindow() {
+        drive(getBrowser(), {
+            getBrowser().to(this)
+
+
+        })
+    }
 }

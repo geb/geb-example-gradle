@@ -1,3 +1,4 @@
+import geb.Browser
 import org.junit.jupiter.api.BeforeEach
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions

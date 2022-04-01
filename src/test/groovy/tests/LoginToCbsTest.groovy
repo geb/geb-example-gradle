@@ -3,6 +3,7 @@ package tests
 import geb.Browser
 import geb.Page
 import geb.junit5.GebReportingTest
+import modules.MainPageCbsModule
 import org.assertj.core.api.Assert
 import org.assertj.core.matcher.AssertionMatcher
 import org.junit.jupiter.api.AfterEach
@@ -17,16 +18,16 @@ import pages.MainPageCbs
 
 @ExtendWith(SeleniumJupiter.class)
 class LoginToCbsTest extends GebReportingTest {
-    public Browser browser = new Browser()
-    public ChromeDriver driver = new ChromeDriver()
+    public Browser browser
+    public ChromeDriver driver
     public CbsLoginPage cbsLoginPage
-    public MainPageCbs mainPageCbs
 
     @BeforeEach
     public void  classLevelSetup() {
+        browser = new Browser()
+        driver = new ChromeDriver()
         browser.setDriver(driver)
         cbsLoginPage = browser.createPage(CbsLoginPage.class)
-        mainPageCbs = browser.createPage(MainPageCbs.class)
     }
 
     @AfterEach
@@ -34,17 +35,15 @@ class LoginToCbsTest extends GebReportingTest {
         browser.quit()
     }
 
-//    @Test
-//    void loginIsSuccessful() {
-//        // When
-////        mainPageCbs.iAmLoginedToCbs(cbsLoginPage, mainPageCbs)
-//        cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Qwerty")
-//        cbsLoginPage.clickLoginButton()
-//
-//        // Then
-//        assertThat(cbsLoginPage.getPageTitle()).isEqualTo("CBS")
-//        mainPageCbs.verifyPageIsDisplayed()
-//    }
+    @Test
+    void loginIsSuccessful() {
+        // When
+        cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Qwerty")
+        cbsLoginPage.clickLoginButton()
+
+        // Then
+        assertThat(browser.getPage().getClass()).isEqualTo(MainPageCbs.class)
+    }
 
     @Test
     void loginFailsWhenPasswordIsWrong() {
@@ -53,6 +52,7 @@ class LoginToCbsTest extends GebReportingTest {
         cbsLoginPage.clickLoginButton()
 
         // Then
+        assertThat(browser.getPage().getClass()).isEqualTo(MainPageCbs.class)
         verifyLoginErrorIsDisplayed()
     }
 
@@ -70,25 +70,8 @@ class LoginToCbsTest extends GebReportingTest {
         (browser.getPage() as CbsLoginPage).getErrorMessage()
     }
 
-
-
-    @Test
-    void loginFailsWhenPasswordIsWrong1() {
-        // When
-        cbsLoginPage.fillCredentialsForm("cbs-tester-1", "123_Wrong_password")
-        cbsLoginPage.clickLoginButton()
-
-        // Then
-        verifyLoginErrorIsDisplayed()
-    }
-
-    @Test
-    void loginFailsWhenUsernameIsWrong1() {
-        // When
-        cbsLoginPage.fillCredentialsForm("Wrong_username", "123_Qwerty")
-        cbsLoginPage.clickLoginButton()
-
-        // Then
-        verifyLoginErrorIsDisplayed()
+    Page waitTopToolBar(Browser browser, int timeout) {
+        browser.waitFor(timeout, { browser.$(id: "topToolbar-innerCt") })
+        return browser.getPage()
     }
 }
