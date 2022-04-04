@@ -21,27 +21,10 @@ class MainPageCbs extends Page {
         })
     }
 
-    void iAmLoginedToCbs(Page cbsLoginPage, Page mainPageCbs) {
-        drive(getBrowser(), {
-            getBrowser().to(this)
-
-            if (!$("#topToolbar").isEmpty()) {
-                return
-            }
-
-            go(browser.getConfig().getRawConfig().baseUrl as String)
-            go(baseUrl)
-            CbsLoginPage.authorizeInCbs("cbs-tester-1", "123_Qwerty")
-            verifyPageIsDisplayed()
-
-        })
-    }
-
-
     void goToInstitutionsWindow() {
         drive(getBrowser(), {
             getBrowser().to(this)
-
+            MainPageCbsModule.documents.click()
 
         })
     }

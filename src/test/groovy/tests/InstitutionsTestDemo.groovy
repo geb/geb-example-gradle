@@ -13,16 +13,16 @@ import pages.MainPageCbs
 
 @ExtendWith(SeleniumJupiter.class)
 class InstitutionsTestDemo extends GebReportingTest {
-    public Browser browser = new Browser()
-    public ChromeDriver driver = new ChromeDriver()
+    public Browser browser
+    public ChromeDriver driver
     public CbsLoginPage cbsLoginPage
-    public MainPageCbs mainPageCbs
 
     @BeforeEach
     public void  classLevelSetup() {
+        browser = new Browser()
+        driver = new ChromeDriver()
         browser.setDriver(driver)
         cbsLoginPage = browser.createPage(CbsLoginPage.class)
-        mainPageCbs = browser.createPage(MainPageCbs.class)
     }
 
     @AfterEach
@@ -32,8 +32,8 @@ class InstitutionsTestDemo extends GebReportingTest {
 
     @Test
     void checkExistingInstitution() {
-        cbsLoginPage.iAmSuccessfulAuthorizeInCbs()
-//        mainPageCbs.goToInstitutionsWindow()
+        cbsLoginPage.iAmSuccesfulAuthorizedInCbs(browser, "Cbs-tester-1", "123_Qwerty")
+        (browser.getPage() as MainPageCbs).goToInstitutionsWindow()
     }
 
 
