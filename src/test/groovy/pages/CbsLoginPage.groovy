@@ -8,11 +8,13 @@ import tests.LoginToCbsTest
 import static geb.Browser.drive
 
 class CbsLoginPage extends Page {
+    static url = "https://test.bocbs.cardpay-test.com/"
+
     static at = { title == "Log in to CBS" }
 
-    static public content = {
+    static content = {
         loginButton { $(name: "login") }
-        loginForm { module(CbsLoginPageModule) }
+        loginForm { module CbsLoginPageModule }
     }
 
     void fillCredentialsForm(String username, String password) {

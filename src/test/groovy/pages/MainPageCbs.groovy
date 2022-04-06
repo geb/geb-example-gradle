@@ -3,29 +3,23 @@ package pages
 import geb.Browser
 import geb.Page
 import modules.MainPageCbsModule
-
-import static geb.Browser.drive
+import modules.SwiftCodeCreationWindow
+import modules.SwiftCodesManualWindowModule
 
 class MainPageCbs extends Page {
 
     static at = { waitFor { title == "CBS"} }
 
     static content = {
-        topToolbar { module(MainPageCbsModule) }
-    }
-
-    void verifyPageIsDisplayed() {
-        drive(getBrowser(), {
-            getBrowser().to(this)
-            waitFor(60) { topToolbar.mainMenu }
-        })
+        mainMenu { module MainPageCbsModule }
+        swiftCodesManualWindowModule { module SwiftCodesManualWindowModule }
+        swiftCodeCreationWindow { module SwiftCodeCreationWindow }
     }
 
     void goToInstitutionsWindow() {
-        drive(getBrowser(), {
+        Browser.drive(getBrowser(), {
             getBrowser().to(this)
             MainPageCbsModule.documents.click()
-
         })
     }
 }
