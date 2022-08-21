@@ -10,7 +10,7 @@ ext {
     drivers = ["firefox", "chrome", "chromeHeadless"]
 
     ext {
-        gebVersion = '5.1'
+        gebVersion = '6.0'
         seleniumVersion = '4.2.2'
         chromeDriverVersion = '79.0.3945.36'
         geckoDriverVersion = '0.31.0'
