@@ -12,7 +12,7 @@ ext {
     ext {
         gebVersion = '6.0'
         seleniumVersion = '4.2.2'
-        chromeDriverVersion = '79.0.3945.36'
+        chromeDriverVersion = '105.0.5195.520'
         geckoDriverVersion = '0.31.0'
     }
 }
