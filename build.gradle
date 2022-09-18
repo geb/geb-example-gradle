@@ -23,8 +23,9 @@ dependencies {
     // If using Spock, need to depend on geb-spock
     testImplementation "org.gebish:geb-spock:$gebVersion"
 
-    // If using JUnit, need to depend on geb-junit
-    testImplementation "org.gebish:geb-junit4:$gebVersion"
+    // If using JUnit 5, need to depend on geb-junit5
+    testImplementation "org.gebish:geb-junit5:$gebVersion"
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     // Drivers
     testImplementation "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
@@ -44,6 +45,8 @@ drivers.each { driver ->
         group JavaBasePlugin.VERIFICATION_GROUP
 
         outputs.upToDateWhen { false }  // Always run tests
+
+        useJUnitPlatform()
 
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
