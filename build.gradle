@@ -9,7 +9,7 @@ ext {
     // The drivers we want to use
     drivers = ["firefox", "chrome", "chromeHeadless"]
 
-    gebVersion = '6.0'
+    gebVersion = '7.0'
     seleniumVersion = '4.2.2'
     chromeDriverVersion = '79.0.3945.36'
     geckoDriverVersion = '0.31.0'
