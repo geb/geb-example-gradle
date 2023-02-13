@@ -10,9 +10,6 @@ The build is set up to work with Firefox and Chrome. Have a look at the [`build.
 
 ## Usage
 
-The build is using a specific version of geckodriver and chromedriver which might seem outdated but are compatible with the versions of Firefox and Chrome installed in CI environments used by this project.
-Prior to running any builds you might need to update `chromeDriverVersion` and `geckoDriverVersion` extension variables in `build.gradle` to a more recent ones and ones which are compatible with the versions of Chrome and Firefox in your environment.
-
 The following commands will launch the tests with the individual browsers:
 
     ./gradlew chromeTest
