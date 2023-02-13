@@ -4,9 +4,9 @@
 
 ## Description
 
-This is an example of incorporating Geb into a Gradle build. It shows the use of Spock and JUnit 4 tests.
+This is an example of incorporating Geb into a Gradle build. It shows the use of Spock and JUnit 5 tests.
 
-The build is setup to work with Firefox and Chrome. Have a look at the `build.gradle` and the `src/test/resources/GebConfig.groovy` files.
+The build is set up to work with Firefox and Chrome. Have a look at the [`build.gradle`] and the [`src/test/resources/GebConfig.groovy`] files.
 
 ## Usage
 
@@ -32,3 +32,5 @@ Please ask questions on [Geb user mailing list][mailing_list] and raise issues i
 [build_status]: https://circleci.com/gh/geb/geb-example-gradle/tree/master.svg?style=shield&circle-token=38eb8de9af8f889922b91624a7943c474c0c3617 "Build Status"
 [mailing_list]: https://groups.google.com/forum/#!forum/geb-user
 [issue_tracker]: https://github.com/geb/issues/issues
+[`build.gradle`]: /build.gradle
+[`src/test/resources/GebConfig.groovy`]: /src/test/resources/GebConfig.groovy
