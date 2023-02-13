@@ -8,6 +8,7 @@
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
+import io.github.bonigarcia.wdm.WebDriverManager
 
 waiting {
 	timeout = 2
@@ -18,12 +19,14 @@ environments {
 	// run via “./gradlew chromeTest”
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chrome {
+		WebDriverManager.chromedriver().setup()
 		driver = { new ChromeDriver() }
 	}
 
 	// run via “./gradlew chromeHeadlessTest”
 	// See: http://code.google.com/p/selenium/wiki/ChromeDriver
 	chromeHeadless {
+		WebDriverManager.chromedriver().setup()
 		driver = {
 			ChromeOptions o = new ChromeOptions()
 			o.addArguments('headless')
@@ -35,6 +38,8 @@ environments {
 	// See: http://code.google.com/p/selenium/wiki/FirefoxDriver
 	firefox {
 		atCheckWaiting = 1
+
+		WebDriverManager.firefoxdriver().setup()
 
 		driver = { new FirefoxDriver() }
 	}
